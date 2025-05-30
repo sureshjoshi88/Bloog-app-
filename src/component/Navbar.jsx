@@ -5,10 +5,10 @@ import { BsFillSunFill } from "react-icons/bs";
 
 const Navbar = (props) => {
   return (
-    <div>
-      <nav className='p-2 flex justify-between items-center'>
+    <div className='sticky top-0 w-full z-50 bg-white'>
+      <nav className='p-2 flex flex-wrap justify-around items-center  '>
         <div>
-            <h1 className='text-2xl font-bold'>Blog-App</h1>
+            <img className='w-20 h-20' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="" />
         </div>
         <div>
             <h1 className='text-2xl font-medium'>This is Blog App</h1>

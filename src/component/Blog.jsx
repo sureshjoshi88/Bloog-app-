@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 
 
-const From = () => {
+const Blog = () => {
   const [array, setArray] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
@@ -134,8 +134,8 @@ const From = () => {
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
               <p class="text-gray-600 font-medium">Description:- {item.description}</p>
-              <div className='h-62 mt-2 w-full  rounded '>
-                <img className='object-contain  rounded-2xl h-60 ' src={item.img} alt="" />
+              <div className=' mt-2 h-auto w-full  rounded '>
+                <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
               </div>
               <p className='font-medium'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
@@ -153,4 +153,4 @@ const From = () => {
   )
 }
 
-export default From
+export default Blog

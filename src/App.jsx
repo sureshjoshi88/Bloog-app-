@@ -1,8 +1,8 @@
 
 import { useState } from 'react'
 import './App.css'
-import From from './component/from'
 import Navbar from './component/Navbar'
+import Blog from './component/Blog';
 
 function App() {
   const [mode,setMode] = useState("light");
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
    <Navbar handlechangeColor={handlechangeColor} mode={mode}/>
-    <From/>
+    <Blog/>
     </>
   )
 }
