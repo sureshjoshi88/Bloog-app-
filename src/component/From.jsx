@@ -9,11 +9,22 @@ const From = () => {
   const [desciption, setDesciption] = useState("");
   const [img, setImg] = useState(null);
   const [display, setDisplay] = useState(false);
+  const [editIndex, setEditIndex] = useState(null); 
+
 
   const fileInputRef = useRef(null);
   const submit = (e) => {
     e.preventDefault()
   }
+  const handleEdit = (index) => {
+  const item = array[index];
+  setName(item.name);
+  setTitle(item.title);
+  setDesciption(item.description);
+  setImg(item.img);
+  setDisplay(true);
+  setEditIndex(index);
+};
   const mainbutton = () => {
     if (name === "" || title === "" || desciption === "" || img === "") {
       alert("please enter value")
@@ -32,18 +43,39 @@ const From = () => {
       console.log(currentTime);
       let dates = `${date}-${month}-${year}`
 
-      const upatedArray = [...array, { name: name, title: title, description: desciption, img: img, time: currentTime, date: dates }]
-      setArray(upatedArray)
-      localStorage.setItem("blog", JSON.stringify([...upatedArray]))
+      // const upatedArray = [...array, { name: name, title: title, description: desciption, img: img, time: currentTime, date: dates }]
+
+
+
+      const updatedBlog = {
+      name,
+      title,
+      description: desciption,
+      img,
+      time: currentTime,
+      date: dates
+    };
+
+    let updatedArray;
+    if (editIndex !== null) {
+      updatedArray = [...array];
+      updatedArray[editIndex] = updatedBlog;
+    } else {
+      updatedArray = [...array, updatedBlog];
+    }
+
+      setArray(updatedArray)
+      localStorage.setItem("blog", JSON.stringify(updatedArray))
       setName("")
       setTitle("")
       setDesciption("")
       setImg(null)
       setDisplay(false)
+       setEditIndex(null);
+      fileInputRef.current.value = "";
     }
 
 
-    fileInputRef.current.value = "";
 
   }
   const handleImageChange = (e) => {
@@ -112,9 +144,12 @@ const From = () => {
               </div>
               <p className='font-medium'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
+              <div className='flex gap-2 flex-wrap'>
               <button onClick={()=>{
                 if (window.confirm("Are you sure you want to delete this blog?")) {handleDelete(index)}}}  className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Delete</button>
-            </div>
+                <button onClick={()=>handleEdit(index)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Edit</button>
+                </div>
+                </div>
           )
         }
       </div>
