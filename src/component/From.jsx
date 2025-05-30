@@ -6,10 +6,10 @@ const From = () => {
   const [array, setArray] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
-  const [desciption, setDesciption] = useState("");
+  const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
   const [display, setDisplay] = useState(false);
-  const [editIndex, setEditIndex] = useState(null); 
+  const [editIndex, setEditIndex] = useState(null);
 
 
   const fileInputRef = useRef(null);
@@ -17,16 +17,16 @@ const From = () => {
     e.preventDefault()
   }
   const handleEdit = (index) => {
-  const item = array[index];
-  setName(item.name);
-  setTitle(item.title);
-  setDesciption(item.description);
-  setImg(item.img);
-  setDisplay(true);
-  setEditIndex(index);
-};
+    const item = array[index];
+    setName(item.name);
+    setTitle(item.title);
+    setDescription(item.description);
+    setImg(item.img);
+    setDisplay(true);
+    setEditIndex(index);
+  };
   const mainbutton = () => {
-    if (name === "" || title === "" || desciption === "" || img === "") {
+    if (name === "" || title === "" || description === "" || img === "") {
       alert("please enter value")
       setDisplay(false)
 
@@ -42,36 +42,31 @@ const From = () => {
       let currentTime = `${hours}:${minute} ${period}`
       console.log(currentTime);
       let dates = `${date}-${month}-${year}`
-
-      // const upatedArray = [...array, { name: name, title: title, description: desciption, img: img, time: currentTime, date: dates }]
-
-
-
       const updatedBlog = {
-      name,
-      title,
-      description: desciption,
-      img,
-      time: currentTime,
-      date: dates
-    };
+        name,
+        title,
+        description,
+        img,
+        time: currentTime,
+        date: dates
+      };
 
-    let updatedArray;
-    if (editIndex !== null) {
-      updatedArray = [...array];
-      updatedArray[editIndex] = updatedBlog;
-    } else {
-      updatedArray = [...array, updatedBlog];
-    }
+      let updatedArray;
+      if (editIndex !== null) {
+        updatedArray = [...array];
+        updatedArray[editIndex] = updatedBlog;
+      } else {
+        updatedArray = [...array, updatedBlog];
+      }
 
       setArray(updatedArray)
       localStorage.setItem("blog", JSON.stringify(updatedArray))
       setName("")
       setTitle("")
-      setDesciption("")
+      setDescription("")
       setImg(null)
       setDisplay(false)
-       setEditIndex(null);
+      setEditIndex(null);
       fileInputRef.current.value = "";
     }
 
@@ -88,18 +83,18 @@ const From = () => {
       reader.readAsDataURL(file);
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     let store = JSON.parse(localStorage.getItem("blog")) || [];
     setArray(store)
 
-  },[])
+  }, [])
 
 
-  const handleDelete=(index)=>{
+  const handleDelete = (index) => {
     let updatedarray = [...array];
-    updatedarray.splice(index,1);
+    updatedarray.splice(index, 1);
     setArray(updatedarray);
-    localStorage.setItem("blog",JSON.stringify(updatedarray))
+    localStorage.setItem("blog", JSON.stringify(updatedarray))
 
   }
   return (
@@ -111,15 +106,15 @@ const From = () => {
 
 
 
-      {display === true ? <div className='absolute top-20  right-100 bg-white p-3 rounded shadow-2xl shadow-amber-200  h-100'>
+      {display === true ? <div className='absolute top-20  right-100 bg-white p-3 rounded shadow-lg shadow-blue-300  h-100'>
         <form action="" onSubmit={submit}>
           <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
           <input id='101' className="border w-100 p-1 rounded-2xl" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
           <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
-          <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={desciption} onChange={(e) => setDesciption(e.target.value)} placeholder='enter a description' required /><br />
-          <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
+          <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
+          <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br/>
           <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
           <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl' onClick={mainbutton}>submit</button>
         </form>
@@ -145,11 +140,12 @@ const From = () => {
               <p className='font-medium'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-2 flex-wrap'>
-              <button onClick={()=>{
-                if (window.confirm("Are you sure you want to delete this blog?")) {handleDelete(index)}}}  className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Delete</button>
-                <button onClick={()=>handleEdit(index)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Edit</button>
-                </div>
-                </div>
+                <button onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this blog?")) { handleDelete(index) }
+                }} className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Delete</button>
+                <button onClick={() => handleEdit(index)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Edit</button>
+              </div>
+            </div>
           )
         }
       </div>
