@@ -1,40 +1,40 @@
-import React from 'react'
-import { useState,useRef  } from 'react'
+import React, { useEffect } from 'react'
+import { useState, useRef } from 'react'
 
- 
+
 const From = () => {
-  const [array,setArray] = useState([]);
-  const [name,setName]  = useState("");
-  const [title,setTitle]  = useState("");
-  const [desciption,setDesciption]  = useState("");
-  const [img , setImg] = useState(null);
+  const [array, setArray] = useState([]);
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [desciption, setDesciption] = useState("");
+  const [img, setImg] = useState(null);
   const [display, setDisplay] = useState(false);
 
-  const fileInputRef = useRef(null); 
-  const submit=(e)=>{
+  const fileInputRef = useRef(null);
+  const submit = (e) => {
     e.preventDefault()
   }
   const mainbutton = () => {
-    if(name===""||title===""||desciption===""||img===""){
+    if (name === "" || title === "" || desciption === "" || img === "") {
       alert("please enter value")
       setDisplay(false)
 
-    }else{
+    } else {
       const time = new Date()
-        let hours = time.getHours();
-        let minute = time.getMinutes();
-        let date = time.getDate();
-        let month = time.getMonth();
-        let year = time.getFullYear();
-         const period = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12 || 12;
-          let currentTime = `${hours}:${minute} ${period}`
-          console.log(currentTime);
-          let dates = `${date}-${month}-${year}`
-          
-      const upatedArray = [...array, {name:name,title:title,description:desciption,img:img,time:currentTime,date:dates}]
+      let hours = time.getHours();
+      let minute = time.getMinutes();
+      let date = time.getDate();
+      let month = time.getMonth();
+      let year = time.getFullYear();
+      const period = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      let currentTime = `${hours}:${minute} ${period}`
+      console.log(currentTime);
+      let dates = `${date}-${month}-${year}`
+
+      const upatedArray = [...array, { name: name, title: title, description: desciption, img: img, time: currentTime, date: dates }]
       setArray(upatedArray)
-      localStorage.setItem("blog",JSON.stringify([...upatedArray]))
+      localStorage.setItem("blog", JSON.stringify([...upatedArray]))
       setName("")
       setTitle("")
       setDesciption("")
@@ -42,65 +42,81 @@ const From = () => {
       setDisplay(false)
     }
 
-     
-      fileInputRef.current.value = "";
-    
+
+    fileInputRef.current.value = "";
+
   }
-    const handleImageChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-    reader.onloadend = () => {
-      setImg(reader.result); // This will be a base64 string
-    };
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImg(reader.result); // This will be a base64 string
+      };
+      reader.readAsDataURL(file);
     }
   };
-  let cart = JSON.parse(localStorage.getItem("blog"))||[];
+  useEffect(()=>{
+    let store = JSON.parse(localStorage.getItem("blog")) || [];
+    setArray(store)
+
+  },[])
+
+
+  const handleDelete=(index)=>{
+    let updatedarray = [...array];
+    updatedarray.splice(index,1);
+    setArray(updatedarray);
+    localStorage.setItem("blog",JSON.stringify(updatedarray))
+
+  }
   return (
     <div className='relative'>
-        <div className='p-2'>
-            <button onClick={()=>setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
-        </div>
+      <div className='p-2'>
+        <button onClick={() => setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
+      </div>
 
 
 
-       <div className='p-3'>
-       { display===true ? <div className='absolute top-20 right-100 bg-white p-3 rounded border shadow h-100'>
-           <form action="" onSubmit={submit}>
-        <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br/>  
-        <input id='101' className="border w-100 p-1 rounded-2xl" type="text" value={name} onChange={(e)=>setName(e.target.value)}  placeholder='enter a name' required/><br/>
-        <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br/> 
-        <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e)=>setTitle(e.target.value)}  placeholder='enter a title' required/><br/>  
-        <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br/> 
-        <input id='103' className="border w-100 p-1 rounded-2xl" type="text"  value={desciption} onChange={(e)=>setDesciption(e.target.value)} placeholder='enter a description' required/><br/>  
-        <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br/> 
-        <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef}  onChange={handleImageChange}  required/><br/>  
-        <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl' onClick={mainbutton}>submit</button>
+
+      {display === true ? <div className='absolute top-20  right-100 bg-white p-3 rounded shadow-2xl shadow-amber-200  h-100'>
+        <form action="" onSubmit={submit}>
+          <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
+          <input id='101' className="border w-100 p-1 rounded-2xl" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
+          <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
+          <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
+          <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
+          <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={desciption} onChange={(e) => setDesciption(e.target.value)} placeholder='enter a description' required /><br />
+          <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
+          <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
+          <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl' onClick={mainbutton}>submit</button>
         </form>
-        </div>
-        :""
-       }
-        {cart.length <=0?  <div className='border shadow rounded bg-amber-50 p-2 w-100'>
-        <p>Authore Name</p>
-        <p>Title</p>
-        <p>Description</p>
-        <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="" />
-          </div>:""}
-        <div className=' grid md:grid-cols-4 gap-4'>
-          {
-            cart.map((item,index)=>
-           <div className='border shadow rounded bg-amber-50 p-2' key={index}> 
-           <p>{item.time}</p>
-           <p>{item.date}</p>
-           <p>{item.name}</p>
-            <p>{item.title}</p>
-            <p>{item.description}</p>
-            <img className='w-40 rounded' src={item.img} alt="" />
+      </div>
+        : ""
+      }
+      {array.length <= 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
+        <p class="text-xl font-bold mb-2">Authore Name</p>
+        <p className='font-semibold'>Title</p>
+        <p class="text-gray-600 font-medium">Description</p>
+        <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="img" />
+      </div> : ""}
+      <div className=' grid md:grid-cols-3 gap-4 p-1'>
+        {
+          array.map((item, index) =>
+            <div className='   bg-gray-200  shadow-md rounded-lg p-4' key={index}>
+              <p className='text-xl font-bold'>Name:- {item.name}</p>
+              <p className='font-medium'>Title:- {item.title}</p>
+              <p class="text-gray-600 font-medium">Description:- {item.description}</p>
+              <div className='h-62 mt-2 w-full  rounded '>
+                <img className='object-contain  rounded-2xl h-60 ' src={item.img} alt="" />
+              </div>
+              <p className='font-medium'>Time:- {item.time}</p>
+              <p className='font-medium'>Date:- {item.date}</p>
+              <button onClick={()=>{
+                if (window.confirm("Are you sure you want to delete this blog?")) {handleDelete(index)}}}  className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Delete</button>
             </div>
-            )
-          }
-        </div>
+          )
+        }
       </div>
     </div>
   )
