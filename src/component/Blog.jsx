@@ -16,21 +16,23 @@ const Blog = () => {
   const submit = (e) => {
     e.preventDefault()
   }
-  const handleEdit = (index) => {
-    const item = array[index];
-    setName(item.name);
-    setTitle(item.title);
-    setDescription(item.description);
-    setImg(item.img);
-    setDisplay(true);
-    setEditIndex(index);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImg(reader.result); // This will be a base64 string
+      };
+      reader.readAsDataURL(file);
+    }
   };
+
   const mainbutton = () => {
     if (name === "" || title === "" || description === "" || img === "") {
       alert("please enter value")
       setDisplay(false)
 
-    } else {
+    } 
       const time = new Date()
       let hours = time.getHours();
       let minute = time.getMinutes();
@@ -41,6 +43,7 @@ const Blog = () => {
       hours = hours % 12 || 12;
       let currentTime = `${hours}:${minute} ${period}`
       let dates = `${date}-${month}-${year}`
+
       const updatedBlog = {
         name,
         title,
@@ -79,27 +82,25 @@ const Blog = () => {
       setDisplay(false)
       setEditIndex(null);
       fileInputRef.current.value = "";
-    }
-
-
-
-  }
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImg(reader.result); // This will be a base64 string
-      };
-      reader.readAsDataURL(file);
-    }
+    
   };
+
   useEffect(() => {
     let store = JSON.parse(localStorage.getItem("blog")) || [];
     setArray(store)
 
-  }, [])
+  }, []);
 
+
+  const handleEdit = (index) => {
+    const item = array[index];
+    setName(item.name);
+    setTitle(item.title);
+    setDescription(item.description);
+    setImg(item.img);
+    setDisplay(true);
+    setEditIndex(index);
+  };
 
   const handleDelete = (index) => {
     let updatedarray = [...array];
@@ -107,7 +108,7 @@ const Blog = () => {
     setArray(updatedarray);
     localStorage.setItem("blog", JSON.stringify(updatedarray))
 
-  }
+  };
   return (
     <div className='relative'>
       <div className='p-2'>
@@ -146,7 +147,7 @@ const Blog = () => {
               <p className='font-medium'>Title:- {item.title}</p>
               <p className="text-gray-600 font-medium">Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
-                {/* <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" /> */}
+                <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
               </div>
               <p className='font-medium'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
