@@ -40,7 +40,6 @@ const Blog = () => {
       const period = hours >= 12 ? "PM" : "AM";
       hours = hours % 12 || 12;
       let currentTime = `${hours}:${minute} ${period}`
-      console.log(currentTime);
       let dates = `${date}-${month}-${year}`
       const updatedBlog = {
         name,
@@ -48,8 +47,20 @@ const Blog = () => {
         description,
         img,
         time: currentTime,
-        date: dates
+        date: dates,
+        createdAt: new Date().getTime() // add this line
+
       };
+
+      // useEffect(() => {
+      //   const now = new Date().getTime();
+      //   let store = JSON.parse(localStorage.getItem("blog")) || [];
+
+      //   // Remove blogs older than 24 hours
+      //   const filtered = store.filter(item => now - item.createdAt < 24 * 60 * 60 * 1000);
+      //   setArray(filtered);
+      //   localStorage.setItem("blog", JSON.stringify(filtered)); // keep only fresh blogs
+      // }, []);
 
       let updatedArray;
       if (editIndex !== null) {
@@ -114,17 +125,17 @@ const Blog = () => {
           <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
           <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
-          <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br/>
+          <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
-          <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl' onClick={mainbutton}>submit</button>
+          <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
         </form>
       </div>
         : ""
       }
       {array.length <= 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
-        <p class="text-xl font-bold mb-2">Authore Name</p>
+        <p className="text-xl font-bold mb-2">Authore Name</p>
         <p className='font-semibold'>Title</p>
-        <p class="text-gray-600 font-medium">Description</p>
+        <p className="text-gray-600 font-medium">Description</p>
         <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="img" />
       </div> : ""}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
@@ -133,9 +144,9 @@ const Blog = () => {
             <div className='   bg-gray-200  shadow-md rounded-lg p-4' key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
-              <p class="text-gray-600 font-medium">Description:- {item.description}</p>
+              <p className="text-gray-600 font-medium">Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
-                <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
+                {/* <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" /> */}
               </div>
               <p className='font-medium'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
