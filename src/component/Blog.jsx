@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 
 
-const Blog = () => {
+const Blog = (props) => {
   const [array, setArray] = useState([]);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
@@ -142,14 +142,14 @@ const Blog = () => {
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array.map((item, index) =>
-            <div className='   bg-gray-200  shadow-md rounded-lg p-4' key={index}>
+            <div className={` ${props.mode==='light'?'bg-gray-200 ':'bg-blue-950'} shadow-md rounded-lg p-4`} key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
-              <p className="text-gray-600 font-medium">Description:- {item.description}</p>
+              <p className={`${props.mode==='light'?'text-gray-600':'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
                 <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
               </div>
-              <p className='font-medium'>Time:- {item.time}</p>
+              <p className='font-medium pt-2'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-2 flex-wrap'>
                 <button onClick={() => {

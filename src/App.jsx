@@ -21,7 +21,7 @@ function App() {
   return (
     <>
    <Navbar handlechangeColor={handlechangeColor} mode={mode}/>
-    <Blog/>
+    <Blog mode={mode}/>
     </>
   )
 }

@@ -5,7 +5,7 @@ import { BsFillSunFill } from "react-icons/bs";
 
 const Navbar = (props) => {
   return (
-    <div className='sticky top-0 w-full z-50 bg-white'>
+    <div className={`sticky top-0 w-full z-50 ${props.mode==="light"?'bg-white':'bg-black'}`}>
       <nav className='p-2 flex flex-wrap justify-around items-center  '>
         <div>
             <img className='w-20 h-20' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="" />
