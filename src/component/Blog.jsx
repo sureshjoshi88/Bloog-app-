@@ -32,58 +32,51 @@ const Blog = (props) => {
       alert("please enter value")
       setDisplay(false)
 
-    } 
-      const time = new Date()
-      let hours = time.getHours();
-      let minute = time.getMinutes();
-      let date = time.getDate();
-      let month = time.getMonth();
-      let year = time.getFullYear();
-      const period = hours >= 12 ? "PM" : "AM";
-      hours = hours % 12 || 12;
-      let currentTime = `${hours}:${minute} ${period}`
-      let dates = `${date}-${month}-${year}`
+    }else{
 
-      const updatedBlog = {
-        name,
-        title,
-        description,
-        img,
-        time: currentTime,
-        date: dates,
-        createdAt: new Date().getTime() // add this line
+   
+    const time = new Date()
+    let hours = time.getHours();
+    let minute = time.getMinutes();
+    let date = time.getDate();
+    let month = time.getMonth();
+    let year = time.getFullYear();
+    const period = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    let currentTime = `${hours}:${minute} ${period}`
+    let dates = `${date}-${month}-${year}`
 
-      };
+    const updatedBlog = {
+      name,
+      title,
+      description,
+      img,
+      time: currentTime,
+      date: dates,
+      createdAt: new Date().getTime() // add this line
 
-      // useEffect(() => {
-      //   const now = new Date().getTime();
-      //   let store = JSON.parse(localStorage.getItem("blog")) || [];
+    };
 
-      //   // Remove blogs older than 24 hours
-      //   const filtered = store.filter(item => now - item.createdAt < 24 * 60 * 60 * 1000);
-      //   setArray(filtered);
-      //   localStorage.setItem("blog", JSON.stringify(filtered)); // keep only fresh blogs
-      // }, []);
+    let updatedArray;
+    if (editIndex !== null) {
+      updatedArray = [...array];
+      updatedArray[editIndex] = updatedBlog;
+    } else {
+      updatedArray = [...array, updatedBlog];
+    }
 
-      let updatedArray;
-      if (editIndex !== null) {
-        updatedArray = [...array];
-        updatedArray[editIndex] = updatedBlog;
-      } else {
-        updatedArray = [...array, updatedBlog];
-      }
+    setArray(updatedArray)
+    localStorage.setItem("blog", JSON.stringify(updatedArray))
+    setName("")
+    setTitle("")
+    setDescription("")
+    setImg(null)
+    setDisplay(false)
+    setEditIndex(null);
+    fileInputRef.current.value = "";
 
-      setArray(updatedArray)
-      localStorage.setItem("blog", JSON.stringify(updatedArray))
-      setName("")
-      setTitle("")
-      setDescription("")
-      setImg(null)
-      setDisplay(false)
-      setEditIndex(null);
-      fileInputRef.current.value = "";
-    
-  };
+  }
+};
 
   useEffect(() => {
     let store = JSON.parse(localStorage.getItem("blog")) || [];
@@ -109,6 +102,20 @@ const Blog = (props) => {
     localStorage.setItem("blog", JSON.stringify(updatedarray))
 
   };
+
+  // if(description.length>=200){
+  //   let descinput = document.getElementById('103');
+  //   descinput.def
+  // }
+  const handledescription=(e)=>{
+    const descriptionValeu = e.target.value
+    if(descriptionValeu.length<=100){
+      setDescription(descriptionValeu);
+    }else{
+      setDescription('');
+      alert("⚠️ Aap 200 characters se zyada nahi likh sakte.")
+    }
+  }
   return (
     <div className='relative'>
       <div className='p-2'>
@@ -125,7 +132,7 @@ const Blog = (props) => {
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
           <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
-          <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
+          <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={description} onChange={ handledescription} placeholder='enter a description' max={10} required /><br />
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
           <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
@@ -142,10 +149,10 @@ const Blog = (props) => {
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array.map((item, index) =>
-            <div className={` ${props.mode==='light'?'bg-gray-200 ':'bg-blue-950'} shadow-md rounded-lg p-4`} key={index}>
+            <div className={` ${props.mode === 'light' ? 'bg-gray-200 ' : 'bg-blue-950'} shadow-md rounded-lg p-4`} key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
-              <p className={`${props.mode==='light'?'text-gray-600':'text-gray-300'} font-medium`}>Description:- {item.description}</p>
+              <p className={`${props.mode === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
                 <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
               </div>
