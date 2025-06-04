@@ -118,14 +118,14 @@ const Blog = (props) => {
   }
   return (
     <div className='relative'>
-      <div className='p-2'>
+      <div className='p-2 sticky top-22'>
         <button onClick={() => setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
       </div>
 
-
-
-
       {display === true ? <div className='absolute top-20  right-100 bg-white p-3 rounded shadow-lg shadow-blue-300  h-100'>
+        <div className='flex justify-end'>
+                  <p className='text-2xl bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={()=>setDisplay(false)}>X</p>
+        </div>
         <form action="" onSubmit={submit}>
           <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
           <input id='101' className="border w-100 p-1 rounded-2xl" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
