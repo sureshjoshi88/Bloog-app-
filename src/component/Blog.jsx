@@ -10,6 +10,7 @@ const Blog = (props) => {
   const [img, setImg] = useState(null);
   const [display, setDisplay] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+  const [error ,setError] = useState("");
 
 
   const fileInputRef = useRef(null);
@@ -103,19 +104,20 @@ const Blog = (props) => {
 
   };
 
-  // if(description.length>=200){
-  //   let descinput = document.getElementById('103');
-  //   descinput.def
-  // }
   const handledescription=(e)=>{
     const descriptionValeu = e.target.value
     if(descriptionValeu.length<=100){
       setDescription(descriptionValeu);
     }else{
       setDescription('');
-      alert("⚠️ Aap 200 characters se zyada nahi likh sakte.")
+      setError("⚠️ Aap 200 characters se zyada nahi likh sakte.")
+       setTimeout(() => {
+    setError("");
+  }, 3000);
     }
   }
+
+ 
   return (
     <div className='relative'>
       <div className='p-2 sticky top-22'>
@@ -133,6 +135,7 @@ const Blog = (props) => {
           <input id='102' className='border w-100 p-1 rounded-2xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
           <input id='103' className="border w-100 p-1 rounded-2xl" type="text" value={description} onChange={ handledescription} placeholder='enter a description' max={10} required /><br />
+          <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border w-100 p-1 rounded-2xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
           <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
