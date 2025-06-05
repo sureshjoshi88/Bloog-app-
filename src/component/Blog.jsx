@@ -151,7 +151,7 @@ const Blog = (props) => {
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array.map((item, index) =>
-            <div className={` ${props.mode === 'light' ? 'bg-gray-200 ' : 'bg-blue-950'} shadow-md rounded-lg p-4`} key={index}>
+            <div className={` ${props.mode === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
               <p className={`${props.mode === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
