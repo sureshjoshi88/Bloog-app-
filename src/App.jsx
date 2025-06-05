@@ -17,11 +17,13 @@ function App() {
       setMode("light")
     }
   }
+  const [display, setDisplay] = useState(false);
+  
 
   return (
     <>
-   <Navbar handlechangeColor={handlechangeColor} mode={mode}/>
-    <Blog mode={mode}/>
+   <Navbar handlechangeColor={handlechangeColor} setDisplay={setDisplay} mode={mode}/>
+    <Blog mode={mode}  display={display} setDisplay={setDisplay}/>
     </>
   )
 }

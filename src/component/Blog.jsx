@@ -8,7 +8,6 @@ const Blog = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
-  const [display, setDisplay] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [error ,setError] = useState("");
 
@@ -31,7 +30,7 @@ const Blog = (props) => {
   const mainbutton = () => {
     if (name === "" || title === "" || description === "" || img === "") {
       alert("please enter value")
-      setDisplay(false)
+      props.setDisplay(false)
 
     }else{
 
@@ -72,7 +71,7 @@ const Blog = (props) => {
     setTitle("")
     setDescription("")
     setImg(null)
-    setDisplay(false)
+    props.setDisplay(false)
     setEditIndex(null);
     fileInputRef.current.value = "";
 
@@ -92,7 +91,7 @@ const Blog = (props) => {
     setTitle(item.title);
     setDescription(item.description);
     setImg(item.img);
-    setDisplay(true);
+    props.setDisplay(true);
     setEditIndex(index);
   };
 
@@ -121,12 +120,12 @@ const Blog = (props) => {
   return (
     <div className='relative'>
       <div className='p-2 sticky top-22'>
-        <button onClick={() => setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
+        <button onClick={() => props.setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
       </div>
 
-      {display === true ? <div className={`absolute z-50 w-150   right-85 p-5 rounded shadow-2xl shadow-blue-300 ${props.mode==='light'?'bg-white':'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 w-150   right-85 p-5 rounded shadow-2xl shadow-blue-300 ${props.mode==='light'?'bg-white':'bg-black'}`}>
         <div className='flex justify-end'>
-                  <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={()=>setDisplay(false)}>X</p>
+                  <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={()=>props.setDisplay(false)}>X</p>
         </div>
         <form action="" onSubmit={submit}>
           <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />

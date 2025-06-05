@@ -10,6 +10,9 @@ const Navbar = (props) => {
         <div>
             <img className='w-20 h-20' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="" />
         </div>
+         <div className='p-2 '>
+        <button onClick={() => props.setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
+      </div>
         <div>
             <h1 className='text-2xl font-medium'>This is Blog App</h1>
         </div>
