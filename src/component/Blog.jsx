@@ -119,9 +119,9 @@ const Blog = (props) => {
  
   return (
     <div className='relative'>
-      <div className='p-2 sticky top-22'>
+      {/* <div className='p-2 sticky top-22'>
         <button onClick={() => props.setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3'>Add new blog</button>
-      </div>
+      </div> */}
 
       {props.display === true ? <div className={`absolute z-50 w-150   right-85 p-5 rounded shadow-2xl shadow-blue-300 ${props.mode==='light'?'bg-white':'bg-black'}`}>
         <div className='flex justify-end'>
