@@ -127,8 +127,8 @@ const Blog = (props) => {
   return (
     <div>
 
-      <div >
-        <input type="search" name="" className="border-2 border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4"
+      <div className='flex justify-center'>
+        <input type="search" name=""  className={`border-2 border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Seach by title and author...' id="" />
       </div>
 
