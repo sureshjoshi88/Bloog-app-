@@ -16,6 +16,7 @@ const Navbar = (props) => {
         <div>
             <h1 className='text-2xl font-medium'>This is Blog App</h1>
         </div>
+        
         <div>
            {props.mode==="light"? <button className='font-bold text-2xl cursor-pointer' onClick={()=>props.handlechangeColor()}><FaMoon /></button>:
             <button className='font-bold text-2xl cursor-pointer' onClick={()=>props.handlechangeColor()}><BsFillSunFill /></button>}

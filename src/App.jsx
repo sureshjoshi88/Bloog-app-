@@ -20,6 +20,7 @@ function App() {
   const [display, setDisplay] = useState(false);
   
 
+
   return (
     <>
    <Navbar handlechangeColor={handlechangeColor} setDisplay={setDisplay} mode={mode}/>
