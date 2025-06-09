@@ -13,9 +13,7 @@ const Navbar = (props) => {
          <div className='p-2 '>
         <button onClick={() => props.setDisplay(true)} className='bg-blue-600 p-1 cursor-pointer text-white rounded  ps-3 pe-3 font-medium shadow shadow-black'>Add new blog</button>
       </div>
-        <div>
-            <h1 className='text-2xl font-medium'>This is Blog App</h1>
-        </div>
+        
         
         <div>
            {props.mode==="light"? <button className='font-bold text-2xl cursor-pointer' onClick={()=>props.handlechangeColor()}><FaMoon /></button>:

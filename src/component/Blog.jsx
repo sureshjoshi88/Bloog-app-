@@ -127,9 +127,10 @@ const Blog = (props) => {
   return (
     <div>
 
-      <div className='flex justify-center'>
-        <input type="search" name=""  className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
+      <div className='flex justify-center gap-20 flex-wrap'>
+        <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Seach by title and author...' id="" />
+        <p className='font-medium text-2xl'>Total Blog = {array.length}</p>
       </div>
 
       {props.display === true ? <div className={`absolute z-50 w-150   right-85 p-5 rounded shadow-2xl shadow-blue-300 ${props.mode === 'light' ? 'bg-white' : 'bg-black'}`}>
