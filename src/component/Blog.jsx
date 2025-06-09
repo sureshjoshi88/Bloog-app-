@@ -128,7 +128,7 @@ const Blog = (props) => {
     <div>
 
       <div className='flex justify-center'>
-        <input type="search" name=""  className={`border-2 border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
+        <input type="search" name=""  className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Seach by title and author...' id="" />
       </div>
 
@@ -165,7 +165,7 @@ const Blog = (props) => {
               <p className='font-medium'>Title:- {item.title}</p>
               <p className={`${props.mode === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
-                <img className='object-cover md:object-coiver w-full md:h-80  rounded-2xl  ' src={item.img} alt="" />
+                <img className='object-cover  w-full md:h-100 md:object-contain  rounded-2xl  ' src={item.img} alt="" />
               </div>
               <p className='font-medium pt-2'>Time:- {item.time}</p>
               <p className='font-medium'>Date:- {item.date}</p>
