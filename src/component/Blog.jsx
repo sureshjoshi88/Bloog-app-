@@ -125,7 +125,7 @@ const Blog = (props) => {
 
 
   return (
-    <div>
+    <div className='relative'>
 
       <div className='flex justify-center gap-20 flex-wrap'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
@@ -133,21 +133,21 @@ const Blog = (props) => {
         <p className='font-medium text-2xl'>Total Blog = {array.length}</p>
       </div>
 
-      {props.display === true ? <div className={`absolute z-50 w-150   right-85 p-5 rounded shadow-2xl shadow-blue-300 ${props.mode === 'light' ? 'bg-white' : 'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-100    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${props.mode === 'light' ? 'bg-white' : 'bg-black'}`}>
         <div className='flex justify-end'>
           <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
         </div>
         <form action="" onSubmit={submit}>
           <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
-          <input id='101' className="border-2 border-blue-500 h-12 w-full p-1 rounded-3xl" autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
+          <input id='101' className="border-2 border-blue-500 h-12 w-full sm:w-full p-1 rounded-3xl" autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
-          <input id='102' className='border-2 border-blue-500 h-12 w-full p-1 rounded-3xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
+          <input id='102' className='border-2 border-blue-500 h-12 w-full sm:w-full p-1 rounded-3xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
-          <input id='103' className="border-2 border-blue-500 h-12 w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
+          <input id='103' className="border-2 border-blue-500 h-12 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
-          <input id='104' className="border-2 border-blue-500 h-12 w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
-          <button type='submit' className='border rounded-2xl bg-green-500 text-white w-100 mt-4 p-2 font-bold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
+          <input id='104' className="border-2 border-blue-500 h-12 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
+          <button type='submit' className='border rounded-2xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
         </form>
       </div>
         : ""
