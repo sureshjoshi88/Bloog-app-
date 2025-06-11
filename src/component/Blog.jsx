@@ -127,7 +127,7 @@ const Blog = (props) => {
   return (
     <div className='relative'>
 
-      <div className='flex justify-center gap-20 flex-wrap'>
+      <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Seach by title and author...' id="" />
         <p className='font-medium text-2xl'>Total Blog = {array.length}</p>
@@ -147,7 +147,7 @@ const Blog = (props) => {
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border-2 border-blue-500 h-12 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
-          <button type='submit' className='border rounded-2xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
+          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>submit</button>
         </form>
       </div>
         : ""
