@@ -52,13 +52,20 @@ const Blog = (props) => {
   const [editIndex, setEditIndex] = useState(null);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState('');
+  const [viewMore, setViewMore] = useState(1);
 
 
 
+  const handleViewMore = ()=>{
+    setViewMore(viewMore + 1);
+  }
+
+  
   const filteredArray = array.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  item.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
+const filterData = filteredArray.slice(0, viewMore);
 
   const fileInputRef = useRef(null);
   const submit = (e) => {
@@ -201,7 +208,7 @@ const Blog = (props) => {
       </div> : ""}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
-          filteredArray.map((item, index) =>
+          filterData.map((item, index) =>
             <div className={` ${props.mode === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
@@ -220,6 +227,9 @@ const Blog = (props) => {
             </div>
           )
         }
+      </div>
+      <div className='flex justify-center mt-5 mb-5'>
+      <button onClick={handleViewMore} className='bg-blue-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>View More</button>
       </div>
     </div>
   )
