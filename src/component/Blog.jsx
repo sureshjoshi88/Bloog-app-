@@ -5,43 +5,43 @@ import { useState, useRef } from 'react'
 const Blog = (props) => {
 
 
-const blogData = [
-  {
-    id: 1,
-    author: "Aarav Mehta",
-    title: "Mastering React in 30 Days",
-    description: "A complete roadmap for beginners to become confident React developers in just a month.",
-    img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
-  },
-  {
-    id: 2,
-    author: "Ritika Sharma | Frontend Developer",
-    title: "10 CSS Tricks Every Web Developer Should Know",
-    description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
-    img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-  },
-  {
-    id: 3,
-    author: "Kunal Verma",
-    title: "Understanding the MERN Stack: A Beginner’s Guide",
-    description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
-    img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
-  },
-  {
-    id: 4,
-    author: "Priya Bansal | UI/UX Designer",
-    title: "Why Mobile-First Design Is the Future",
-    description: "Learn how mobile-first design can improve your user engagement and accessibility.",
-    img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
-  },
-  {
-    id: 5,
-    author: "Rahul Dev",
-    title: "From Zero to Hero in JavaScript",
-    description: "This guide will help you build a solid JavaScript foundation from scratch.",
-    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-  }
-];
+// const blogData = [
+//   {
+//     id: 1,
+//     author: "Aarav Mehta",
+//     title: "Mastering React in 30 Days",
+//     description: "A complete roadmap for beginners to become confident React developers in just a month.",
+//     img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
+//   },
+//   {
+//     id: 2,
+//     author: "Ritika Sharma | Frontend Developer",
+//     title: "10 CSS Tricks Every Web Developer Should Know",
+//     description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
+//     img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+//   },
+//   {
+//     id: 3,
+//     author: "Kunal Verma",
+//     title: "Understanding the MERN Stack: A Beginner’s Guide",
+//     description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
+//     img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
+//   },
+//   {
+//     id: 4,
+//     author: "Priya Bansal | UI/UX Designer",
+//     title: "Why Mobile-First Design Is the Future",
+//     description: "Learn how mobile-first design can improve your user engagement and accessibility.",
+//     img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
+//   },
+//   {
+//     id: 5,
+//     author: "Rahul Dev",
+//     title: "From Zero to Hero in JavaScript",
+//     description: "This guide will help you build a solid JavaScript foundation from scratch.",
+//     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+//   }
+// ];
 
 
   const [array, setArray] = useState([]);
@@ -59,12 +59,12 @@ const blogsPerPage = 2;
 
 
 
-  const handleViewMore = ()=>{
-    setViewMore(viewMore + 1);
-  }
+  // const handleViewMore = ()=>{
+  //   setViewMore(viewMore + 1);
+  // }
 
   
-  const filteredArray = blogData.filter((item) =>
+  const filteredArray = array.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
   item.name.toLowerCase().includes(searchTerm.toLowerCase())
 );
