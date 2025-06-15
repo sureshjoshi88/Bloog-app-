@@ -52,10 +52,10 @@ const Blog = (props) => {
   const [editIndex, setEditIndex] = useState(null);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState('');
-  const [viewMore, setViewMore] = useState(1);
+  // const [viewMore, setViewMore] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
-const blogsPerPage = 2;
+const blogsPerPage = 3;
 
 
 
