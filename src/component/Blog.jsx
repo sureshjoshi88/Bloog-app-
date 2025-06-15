@@ -5,43 +5,43 @@ import { useState, useRef } from 'react'
 const Blog = (props) => {
 
 
-// const blogData = [
-//   {
-//     id: 1,
-//     author: "Aarav Mehta",
-//     title: "Mastering React in 30 Days",
-//     description: "A complete roadmap for beginners to become confident React developers in just a month.",
-//     img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
-//   },
-//   {
-//     id: 2,
-//     author: "Ritika Sharma | Frontend Developer",
-//     title: "10 CSS Tricks Every Web Developer Should Know",
-//     description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
-//     img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-//   },
-//   {
-//     id: 3,
-//     author: "Kunal Verma",
-//     title: "Understanding the MERN Stack: A Beginner’s Guide",
-//     description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
-//     img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
-//   },
-//   {
-//     id: 4,
-//     author: "Priya Bansal | UI/UX Designer",
-//     title: "Why Mobile-First Design Is the Future",
-//     description: "Learn how mobile-first design can improve your user engagement and accessibility.",
-//     img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
-//   },
-//   {
-//     id: 5,
-//     author: "Rahul Dev",
-//     title: "From Zero to Hero in JavaScript",
-//     description: "This guide will help you build a solid JavaScript foundation from scratch.",
-//     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-//   }
-// ];
+const blogData = [
+  {
+    id: 1,
+    author: "Aarav Mehta",
+    title: "Mastering React in 30 Days",
+    description: "A complete roadmap for beginners to become confident React developers in just a month.",
+    img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
+  },
+  {
+    id: 2,
+    author: "Ritika Sharma | Frontend Developer",
+    title: "10 CSS Tricks Every Web Developer Should Know",
+    description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
+    img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+  },
+  {
+    id: 3,
+    author: "Kunal Verma",
+    title: "Understanding the MERN Stack: A Beginner’s Guide",
+    description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
+    img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
+  },
+  {
+    id: 4,
+    author: "Priya Bansal | UI/UX Designer",
+    title: "Why Mobile-First Design Is the Future",
+    description: "Learn how mobile-first design can improve your user engagement and accessibility.",
+    img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
+  },
+  {
+    id: 5,
+    author: "Rahul Dev",
+    title: "From Zero to Hero in JavaScript",
+    description: "This guide will help you build a solid JavaScript foundation from scratch.",
+    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+  }
+];
 
 
   const [array, setArray] = useState([]);
@@ -54,6 +54,9 @@ const Blog = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMore, setViewMore] = useState(1);
 
+  const [currentPage, setCurrentPage] = useState(1);
+const blogsPerPage = 2;
+
 
 
   const handleViewMore = ()=>{
@@ -61,11 +64,16 @@ const Blog = (props) => {
   }
 
   
-  const filteredArray = array.filter((item) =>
+  const filteredArray = blogData.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
   item.name.toLowerCase().includes(searchTerm.toLowerCase())
 );
-const filterData = filteredArray.slice(0, viewMore);
+// const filterData = filteredArray.slice(0, viewMore);
+
+const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
+const indexOfLastBlog = currentPage * blogsPerPage;
+const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const fileInputRef = useRef(null);
   const submit = (e) => {
@@ -137,7 +145,7 @@ const filterData = filteredArray.slice(0, viewMore);
     let store = JSON.parse(localStorage.getItem("blog")) || [];
     setArray(store)
 
-  }, []);
+  }, [array]);
 
 
   const handleEdit = (index) => {
@@ -228,9 +236,43 @@ const filterData = filteredArray.slice(0, viewMore);
           )
         }
       </div>
-      <div className='flex justify-center mt-5 mb-5'>
+      {/* <div className='flex justify-center mt-5 mb-5'>
       <button onClick={handleViewMore} className='bg-blue-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>View More</button>
-      </div>
+      </div> */}
+      <div className='flex justify-center items-center gap-4 mt-5 mb-5'>
+  <button
+    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+    className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+
+  <span className='font-semibold'>Page {currentPage} of {totalPages}</span>
+
+  <button
+    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+    className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+    disabled={currentPage === totalPages}
+  >
+    Next
+  </button>
+</div>
+{/* <div className='flex justify-center items-center flex-wrap gap-2 mt-2'>
+  {Array.from({ length: totalPages }, (_, index) => (
+    <button
+      key={index}
+      onClick={() => setCurrentPage(index + 1)}
+      className={`px-4 py-1 rounded ${
+        currentPage === index + 1 ? 'bg-blue-700 text-white' : 'bg-gray-300 text-black'
+      }`}
+    >
+      {index + 1}
+    </button>
+  ))}
+</div> */}
+
+
     </div>
   )
 }
