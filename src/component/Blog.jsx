@@ -38,7 +38,7 @@ const Blog = (props) => {
 //     id: 5,
 //     author: "Rahul Dev",
 //     title: "From Zero to Hero in JavaScript",
-//     description: "This guide will help you build a solid JavaScript foundation from scratch.",
+//     description: " ",
 //     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
 //   }
 // ];
