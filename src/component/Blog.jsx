@@ -5,43 +5,43 @@ import { useState, useRef } from 'react'
 const Blog = (props) => {
 
 
-// const blogData = [
-//   {
-//     id: 1,
-//     author: "Aarav Mehta",
-//     title: "Mastering React in 30 Days",
-//     description: "A complete roadmap for beginners to become confident React developers in just a month.",
-//     img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
-//   },
-//   {
-//     id: 2,
-//     author: "Ritika Sharma | Frontend Developer",
-//     title: "10 CSS Tricks Every Web Developer Should Know",
-//     description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
-//     img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-//   },
-//   {
-//     id: 3,
-//     author: "Kunal Verma",
-//     title: "Understanding the MERN Stack: A Beginner’s Guide",
-//     description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
-//     img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
-//   },
-//   {
-//     id: 4,
-//     author: "Priya Bansal | UI/UX Designer",
-//     title: "Why Mobile-First Design Is the Future",
-//     description: "Learn how mobile-first design can improve your user engagement and accessibility.",
-//     img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
-//   },
-//   {
-//     id: 5,
-//     author: "Rahul Dev",
-//     title: "From Zero to Hero in JavaScript",
-//     description: " ",
-//     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-//   }
-// ];
+  // const blogData = [
+  //   {
+  //     id: 1,
+  //     author: "Aarav Mehta",
+  //     title: "Mastering React in 30 Days",
+  //     description: "A complete roadmap for beginners to become confident React developers in just a month.",
+  //     img: "https://images.unsplash.com/photo-1581093588401-6c2a30e84e53"
+  //   },
+  //   {
+  //     id: 2,
+  //     author: "Ritika Sharma | Frontend Developer",
+  //     title: "10 CSS Tricks Every Web Developer Should Know",
+  //     description: "Enhance your UI/UX skills with these simple yet powerful CSS techniques.",
+  //     img: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+  //   },
+  //   {
+  //     id: 3,
+  //     author: "Kunal Verma",
+  //     title: "Understanding the MERN Stack: A Beginner’s Guide",
+  //     description: "Explore MongoDB, Express, React, and Node.js with real-world examples and tips.",
+  //     img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
+  //   },
+  //   {
+  //     id: 4,
+  //     author: "Priya Bansal | UI/UX Designer",
+  //     title: "Why Mobile-First Design Is the Future",
+  //     description: "Learn how mobile-first design can improve your user engagement and accessibility.",
+  //     img: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
+  //   },
+  //   {
+  //     id: 5,
+  //     author: "Rahul Dev",
+  //     title: "From Zero to Hero in JavaScript",
+  //     description: " ",
+  //     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+  //   }
+  // ];
 
 
   const [array, setArray] = useState([]);
@@ -55,25 +55,25 @@ const Blog = (props) => {
   // const [viewMore, setViewMore] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
-const blogsPerPage = 3;
+  const blogsPerPage = 3;
 
 
-  
+
   // const handleViewMore = ()=>{
   //   setViewMore(viewMore + 1);
   // }
 
-  
+
   const filteredArray = array.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  item.name.toLowerCase().includes(searchTerm.toLowerCase())
-);
-// const filterData = filteredArray.slice(0, viewMore);
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // const filterData = filteredArray.slice(0, viewMore);
 
-const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
-const indexOfLastBlog = currentPage * blogsPerPage;
-const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
+  const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const fileInputRef = useRef(null);
   const submit = (e) => {
@@ -84,7 +84,7 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImg(reader.result); 
+        setImg(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -116,7 +116,7 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
         img,
         time: currentTime,
         date: dates,
-        createdAt: new Date().getTime() 
+        createdAt: new Date().getTime()
 
       };
 
@@ -202,7 +202,8 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
-          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
+          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} accept="image/*"
+            capture="environment" required /><br />
           <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>Submit</button>
         </form>
       </div>
@@ -240,25 +241,25 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
       <button onClick={handleViewMore} className='bg-blue-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>View More</button>
       </div> */}
       <div className='flex justify-center items-center gap-4 mt-5 mb-5'>
-  <button
-    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-    className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
-    disabled={currentPage === 1}
-  >
-    Previous
-  </button>
+        <button
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
 
-  <span className='font-semibold'>Page {currentPage} of {totalPages}</span>
+        <span className='font-semibold'>Page {currentPage} of {totalPages}</span>
 
-  <button
-    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-    className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
-    disabled={currentPage === totalPages}
-  >
-    Next
-  </button>
-</div>
-{/* <div className='flex justify-center items-center flex-wrap gap-2 mt-2'>
+        <button
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
+      {/* <div className='flex justify-center items-center flex-wrap gap-2 mt-2'>
   {Array.from({ length: totalPages }, (_, index) => (
     <button
       key={index}
