@@ -84,7 +84,7 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImg(reader.result); // This will be a base64 string
+        setImg(reader.result); 
       };
       reader.readAsDataURL(file);
     }
@@ -116,7 +116,7 @@ const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
         img,
         time: currentTime,
         date: dates,
-        createdAt: new Date().getTime() // add this line
+        createdAt: new Date().getTime() 
 
       };
 
