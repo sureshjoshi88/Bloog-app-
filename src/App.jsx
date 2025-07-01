@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './component/Navbar'
 import Blog from './component/Blog';
 import Form from './component/Form';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const [mode,setMode] = useState("light");
@@ -25,8 +26,11 @@ function App() {
   return (
     <>
    <Navbar handlechangeColor={handlechangeColor} setDisplay={setDisplay} mode={mode}/>
-    <Blog mode={mode}  display={display} setDisplay={setDisplay}/>
-    <Form/>
+   <Routes>
+    <Route path='/' element={<Blog mode={mode}  display={display} setDisplay={setDisplay} />}/>
+    <Route path='/from' element={<Form mode={mode} />}/>
+   </Routes>
+   
     </>
   )
 }
