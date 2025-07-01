@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from './component/Navbar'
 import Blog from './component/Blog';
+import Form from './component/Form';
 
 function App() {
   const [mode,setMode] = useState("light");
@@ -25,6 +26,7 @@ function App() {
     <>
    <Navbar handlechangeColor={handlechangeColor} setDisplay={setDisplay} mode={mode}/>
     <Blog mode={mode}  display={display} setDisplay={setDisplay}/>
+    <Form/>
     </>
   )
 }
