@@ -145,7 +145,7 @@ const Blog = (props) => {
     let store = JSON.parse(localStorage.getItem("blog")) || [];
     setArray(store)
 
-  }, [array]);
+  }, []);
 
 
   const handleEdit = (index) => {
