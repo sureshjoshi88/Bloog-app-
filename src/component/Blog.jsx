@@ -181,8 +181,7 @@ const Blog = (props) => {
 
 
   return (
-    // accept="image/*"
-    //         capture="environment"
+   
 
     
     <div className='relative'>
