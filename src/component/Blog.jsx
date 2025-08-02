@@ -240,9 +240,7 @@ const Blog = (props) => {
           )
         }
       </div>
-      {/* <div className='flex justify-center mt-5 mb-5'>
-      <button onClick={handleViewMore} className='bg-blue-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>View More</button>
-      </div> */}
+     
       <div className='flex justify-center items-center gap-4 mt-5 mb-5'>
         <button
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
@@ -262,21 +260,6 @@ const Blog = (props) => {
           Next
         </button>
       </div>
-      {/* <div className='flex justify-center items-center flex-wrap gap-2 mt-2'>
-  {Array.from({ length: totalPages }, (_, index) => (
-    <button
-      key={index}
-      onClick={() => setCurrentPage(index + 1)}
-      className={`px-4 py-1 rounded ${
-        currentPage === index + 1 ? 'bg-blue-700 text-white' : 'bg-gray-300 text-black'
-      }`}
-    >
-      {index + 1}
-    </button>
-  ))}
-</div> */}
-
-
     </div>
   )
 }
