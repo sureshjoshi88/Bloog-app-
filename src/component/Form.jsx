@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useTheme } from '../context/themeReducer';
 
 const Form = () => {
-  const [theme, setTheme] = useState()
+  const {theme, setTheme} = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,7 +50,7 @@ const Form = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+      <form onSubmit={handleSubmit} className={`shadow-xl rounded-2xl p-8 w-full max-w-md ${theme==="light"?"bg-white":"bg-sky-800"}`}>
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Registration Form</h2>
 
         {/* Name */}
