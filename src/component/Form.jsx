@@ -50,12 +50,12 @@ const Form = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit} className={`shadow-xl rounded-2xl p-8 w-full max-w-md ${theme==="light"?"bg-white":"bg-sky-800"}`}>
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Registration Form</h2>
+      <form onSubmit={handleSubmit} className={`shadow-xl rounded-2xl p-8 w-full max-w-md ${theme==="light"?"bg-white":"bg-gray-800"}`}>
+        <h2 className={`text-2xl font-bold mb-6 text-center ${theme==="light"?"text-blue-600":""} `}>Registration Form</h2>
 
         {/* Name */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Name</label>
+          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Name</label>
           <input
             name="name"
             value={formData.name}
@@ -69,7 +69,7 @@ const Form = () => {
 
         {/* Email */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Email</label>
           <input
             name="email"
             value={formData.email}
@@ -83,7 +83,7 @@ const Form = () => {
 
         {/* Password */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Password</label>
+          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Password</label>
           <input
             name="password"
             value={formData.password}
@@ -97,7 +97,7 @@ const Form = () => {
 
         {/* Mobile */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">Mobile</label>
+          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Mobile</label>
           <input
             name="mobile"
             value={formData.mobile}

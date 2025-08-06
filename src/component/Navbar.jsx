@@ -9,7 +9,7 @@ const Navbar = (props) => {
   const {theme , setTheme} = useTheme();
   const handleColor = () =>{
 if(theme==="light"){
-      document.body.style.backgroundColor = "black";
+      document.body.style.backgroundColor = "#181a1a";
       document.body.style.color = "white"
       setTheme("dark")
     }else{
@@ -20,7 +20,7 @@ if(theme==="light"){
   }
   return (
 
-    <div className={`sticky top-0 w-full z-50 ${theme==="light"?'bg-white':'bg-black'}`}>
+    <div className={`sticky top-0 w-full z-50 ${theme==="light"?'bg-white':'bg-gray-900'}`}>
       <nav className='p-1 flex flex-wrap justify-around items-center  '>
         <div>
             <img className='w-20 h-20' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="" />
