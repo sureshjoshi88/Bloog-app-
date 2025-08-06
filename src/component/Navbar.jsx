@@ -2,11 +2,25 @@ import React from 'react'
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
+import { useTheme } from '../context/themeReducer';
 
 
 const Navbar = (props) => {
+  const {theme , setTheme} = useTheme();
+  const handleColor = () =>{
+if(theme==="light"){
+      document.body.style.backgroundColor = "black";
+      document.body.style.color = "white"
+      setTheme("dark")
+    }else{
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black"
+      setTheme("light")
+    }    
+  }
   return (
-    <div className={`sticky top-0 w-full z-50 ${props.mode==="light"?'bg-white':'bg-black'}`}>
+
+    <div className={`sticky top-0 w-full z-50 ${theme==="light"?'bg-white':'bg-black'}`}>
       <nav className='p-1 flex flex-wrap justify-around items-center  '>
         <div>
             <img className='w-20 h-20' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="" />
@@ -23,8 +37,8 @@ const Navbar = (props) => {
         
         
         <div>
-           {props.mode==="light"? <button className='font-bold text-2xl cursor-pointer' onClick={()=>props.handlechangeColor()}><FaMoon /></button>:
-            <button className='font-bold text-2xl cursor-pointer' onClick={()=>props.handlechangeColor()}><BsFillSunFill /></button>}
+           {props.mode==="light"? <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><FaMoon /></button>:
+            <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
       </nav>
     </div>

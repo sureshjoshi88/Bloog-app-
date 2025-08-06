@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
+import { useTheme } from '../context/themeReducer';
 
 
 const Blog = (props) => {
@@ -52,6 +53,7 @@ const Blog = (props) => {
   const [editIndex, setEditIndex] = useState(null);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState('');
+  const {theme,setTheme} = useTheme()
   // const [viewMore, setViewMore] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -192,7 +194,7 @@ const Blog = (props) => {
         <p className='font-medium text-2xl'>Total Blog = {array.length}</p>
       </div>
 
-      {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${props.mode === 'light' ? 'bg-white' : 'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
         <div className='flex justify-end'>
           <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
         </div>
@@ -220,10 +222,10 @@ const Blog = (props) => {
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           filterData.map((item, index) =>
-            <div className={` ${props.mode === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
+            <div className={` ${theme=== 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
               <p className='text-xl font-bold'>Name:- {item.name}</p>
               <p className='font-medium'>Title:- {item.title}</p>
-              <p className={`${props.mode === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
+              <p className={`${theme=== 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
                 <img className='object-cover  w-full md:h-100 md:object-contain  rounded-2xl  ' src={item.img} alt="" />
               </div>
