@@ -207,7 +207,7 @@ const Blog = (props) => {
       <div className='flex justify-center items-center gap-4 mt-5 mb-5'>
         <button
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50 cursor-pointer'
           disabled={currentPage === 1}
         >
           Previous
@@ -217,7 +217,7 @@ const Blog = (props) => {
 
         <button
           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50'
+          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50 cursor-pointer'
           disabled={currentPage === totalPages}
         >
           Next
