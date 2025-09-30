@@ -14,8 +14,8 @@ const Blog = (props) => {
   const [img, setImg] = useState(null);
   const [editIndex, setEditIndex] = useState(null);
   const [error, setError] = useState("");
-  const [searchTerm, setSearchTerm] = useState('');
   const { theme, setTheme } = useTheme()
+  const [search ,setSearch] = useState("")
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -28,86 +28,26 @@ const Blog = (props) => {
   // // }
 
 
-  // // const filteredArray = array.filter((item) =>
-  // //   item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  // //   item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // // );
-  // // const filterData = filteredArray.slice(0, viewMore);
+ 
 
   // // const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
   // // const indexOfLastBlog = currentPage * blogsPerPage;
   // // const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   // // const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  // const fileInputRef = useRef(null);
-  // const submit = (e) => {
-  //   e.preventDefault()
-  // }
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setImg(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
+  
   // const mainbutton = () => {
   //   if (name === "" || title === "" || description === "" || img === "") {
   //     alert("please enter value")
   //     props.setDisplay(false)
 
-  //   } else {
-
-
-  //     const time = new Date()
-  //     let hours = time.getHours();
-  //     let minute = time.getMinutes();
-  //     let date = time.getDate();
-  //     let month = time.getMonth();
-  //     let year = time.getFullYear();
-  //     const period = hours >= 12 ? "PM" : "AM";
-  //     hours = hours % 12 || 12;
-  //     let currentTime = `${hours}:${minute} ${period}`
-  //     let dates = `${date}-${month}-${year}`
-
-  //     const updatedBlog = {
-  //       name,
-  //       title,
-  //       description,
-  //       img,
-  //       time: currentTime,
-  //       date: dates,
-  //       createdAt: new Date().getTime()
-
-  //     };
-
-  //     let updatedArray;
-  //     if (editIndex !== null) {
-  //       updatedArray = [...array];
-  //       updatedArray[editIndex] = updatedBlog;
-  //     } else {
-  //       updatedArray = [...array, updatedBlog];
-  //     }
-
-  //     setArray(updatedArray)
-  //     localStorage.setItem("blog", JSON.stringify(updatedArray))
-  //     setName("")
-  //     setTitle("")
-  //     setDescription("")
-  //     setImg(null)
-  //     props.setDisplay(false)
-  //     setEditIndex(null);
-  //     fileInputRef.current.value = "";
-
-  //   }
+  //   } 
+ 
   // };
 
   const handleapi = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/blogs/blog");
+      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
       const data = await response.json();
       setArray(data.blog);
       console.log(data);
@@ -118,8 +58,7 @@ const Blog = (props) => {
     }
   }
   useEffect(() => {
-    // let store = JSON.parse(localStorage.getItem("blog")) || [];
-    // setArray(store)
+   
     handleapi()
   }, []);
 
@@ -155,8 +94,6 @@ const Blog = (props) => {
     }
   }
 
-  console.log(array);
-
   return (
 
 
@@ -165,11 +102,11 @@ const Blog = (props) => {
 
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
-          value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Seach by title and author...' id="" />
-        {/* <p className='font-medium text-2xl'>Total Blog = {array.length}</p> */}
+          value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Seach by title and author...' id="" />
+        <p className='font-medium text-2xl'>Total Blog = {array.length}</p>
       </div>
 
-      {/* {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
         <div className='flex justify-end'>
           <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
         </div>
@@ -187,24 +124,22 @@ const Blog = (props) => {
         </form>
       </div>
         : ""
-      } */}
-      {/* {array.blog.length <= 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
+      }
+      {array.length <= 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
         <p className="text-xl font-bold mb-2">Authore Name</p>
         <p className='font-semibold'>Title</p>
         <p className="text-gray-600 font-medium">Description</p>
         <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="img" />
-      </div> : ""} */}
+      </div> : ""}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array?.map((item, index) =>
             <div className={` ${theme === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
-              {/* <p className='text-xl font-bold'>Name:- {item.name}</p> */}
               <p className='font-medium'>Title:- {item.title}</p>
               <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <div className=' mt-2 h-auto w-full  rounded '>
                 <img className='object-cover  w-full md:h-100 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
               </div>
-              {/* <p className='font-medium pt-2'>Time:- {item.time}</p> */}
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-2 flex-wrap'>
                 <button onClick={() => {
