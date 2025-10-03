@@ -125,7 +125,7 @@ const Blog = (props) => {
       </div>
         : ""
       }
-      {array.length <= 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
+      {array.length == 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
         <p className="text-xl font-bold mb-2">Authore Name</p>
         <p className='font-semibold'>Title</p>
         <p className="text-gray-600 font-medium">Description</p>
