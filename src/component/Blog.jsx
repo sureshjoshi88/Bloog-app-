@@ -50,7 +50,6 @@ const Blog = (props) => {
       const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
       const data = await response.json();
       setArray(data.blog);
-      console.log(data);
       
     } catch (error) {
       console.log(error);
@@ -94,6 +93,9 @@ const Blog = (props) => {
     }
   }
 
+  const handleAddData = ()=>{
+    
+  }
   return (
 
 
