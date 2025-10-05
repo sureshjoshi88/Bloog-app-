@@ -50,6 +50,23 @@ const submit =(e)=>{
   e.preventDefault();
 } 
 
+
+ const handleapi = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
+      const data = await response.json();
+      setArray(data.blog);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+  useEffect(() => {
+
+    handleapi()
+  }, []);
+
   const handleEdit = (index) => {
     const item = array[index];
     setName(item.name);
@@ -72,6 +89,7 @@ const submit =(e)=>{
       .then((result) => {
         console.log(result),
           alert(result.message)
+          handleapi()
       })
     } catch (error) {
         console.log(error);
@@ -111,26 +129,16 @@ const requestOptions = {
 
 fetch("http://localhost:8000/api/blogs/blog", requestOptions)
   .then((response) => response.text())
-  .then((result) => console.log(result),alert("blog add"))
+  .then((result) => {
+    console.log(result)
+    handleapi()
+    alert("blog add")
+  })
   .catch((error) => console.error(error));
   }
 
 
-  const handleapi = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
-      const data = await response.json();
-      setArray(data.blog);
-
-    } catch (error) {
-      console.log(error);
-
-    }
-  }
-  useEffect(() => {
-
-    handleapi()
-  }, [handleDelete,handleAddData]);
+ 
   return (
 
 
