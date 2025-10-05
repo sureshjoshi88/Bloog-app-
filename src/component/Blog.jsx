@@ -8,7 +8,7 @@ const Blog = (props) => {
 
 
   const [array, setArray] = useState([]);
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
@@ -46,7 +46,9 @@ const Blog = (props) => {
   // };
 
   
-
+const submit =(e)=>{
+  e.preventDefault();
+} 
 
   const handleEdit = (index) => {
     const item = array[index];
@@ -59,7 +61,8 @@ const Blog = (props) => {
   };
 
   const handleDelete = (id) => {
-    const requestOptions = {
+    try {
+       const requestOptions = {
       method: "DELETE",
       redirect: "follow"
     };
@@ -70,7 +73,11 @@ const Blog = (props) => {
         console.log(result),
           alert(result.message)
       })
-      .catch((error) => console.error(error));
+    } catch (error) {
+        console.log(error);
+        
+    }
+   
   };
 
   const handledescription = (e) => {
@@ -87,7 +94,25 @@ const Blog = (props) => {
   }
 
   const handleAddData = () => {
+    if(!title||!description||!img){
+      alert("please fill the all filed")
+      return; 
+    }
+    const formdata = new FormData();
+formdata.append("title", title);
+formdata.append("description", description);
+formdata.append("image", img);
 
+const requestOptions = {
+  method: "POST",
+  body: formdata,
+  redirect: "follow"
+};
+
+fetch("http://localhost:8000/api/blogs/blog", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result),alert("blog add"))
+  .catch((error) => console.error(error));
   }
 
 
@@ -105,7 +130,7 @@ const Blog = (props) => {
   useEffect(() => {
 
     handleapi()
-  }, [handleDelete]);
+  }, [handleDelete,handleAddData]);
   return (
 
 
@@ -123,16 +148,16 @@ const Blog = (props) => {
           <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
         </div>
         <form action="" onSubmit={submit}>
-          <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
-          <input id='101' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br />
+          {/* <label htmlFor='101' className='font-semibold ps-2 text-xl'>author</label><br />
+          <input id='101' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='enter a name' required /><br /> */}
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
           <input id='102' className='border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
-          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
-          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>Submit</button>
+          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file"   onChange={(e)=>setImg(e.target.files[0])} required /><br />
+          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>Submit</button>
         </form>
       </div>
         : ""
