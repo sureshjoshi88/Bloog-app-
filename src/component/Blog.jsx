@@ -15,7 +15,7 @@ const Blog = (props) => {
   const [editIndex, setEditIndex] = useState(null);
   const [error, setError] = useState("");
   const { theme, setTheme } = useTheme()
-  const [search ,setSearch] = useState("")
+  const [search, setSearch] = useState("")
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -28,38 +28,24 @@ const Blog = (props) => {
   // // }
 
 
- 
+
 
   // // const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
   // // const indexOfLastBlog = currentPage * blogsPerPage;
   // // const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   // // const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  
+
   // const mainbutton = () => {
   //   if (name === "" || title === "" || description === "" || img === "") {
   //     alert("please enter value")
   //     props.setDisplay(false)
 
   //   } 
- 
+
   // };
 
-  const handleapi = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
-      const data = await response.json();
-      setArray(data.blog);
-      
-    } catch (error) {
-      console.log(error);
-
-    }
-  }
-  useEffect(() => {
-   
-    handleapi()
-  }, []);
+  
 
 
   const handleEdit = (index) => {
@@ -73,7 +59,18 @@ const Blog = (props) => {
   };
 
   const handleDelete = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      redirect: "follow"
+    };
 
+    fetch(`http://localhost:8000/api/blogs/blog/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result),
+          alert(result.message)
+      })
+      .catch((error) => console.error(error));
   };
 
   const handledescription = (e) => {
@@ -89,9 +86,26 @@ const Blog = (props) => {
     }
   }
 
-  const handleAddData = ()=>{
-    
+  const handleAddData = () => {
+
   }
+
+
+  const handleapi = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
+      const data = await response.json();
+      setArray(data.blog);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+  useEffect(() => {
+
+    handleapi()
+  }, [handleDelete]);
   return (
 
 
@@ -117,7 +131,7 @@ const Blog = (props) => {
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
-          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange}  required /><br />
+          <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" ref={fileInputRef} onChange={handleImageChange} required /><br />
           <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={mainbutton}>Submit</button>
         </form>
       </div>
