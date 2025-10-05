@@ -72,11 +72,7 @@ const Blog = (props) => {
     setEditIndex(index);
   };
 
-  const handleDelete = (index) => {
-    let updatedarray = [...array];
-    updatedarray.splice(index, 1);
-    setArray(updatedarray);
-    localStorage.setItem("blog", JSON.stringify(updatedarray))
+  const handleDelete = (id) => {
 
   };
 
@@ -143,11 +139,11 @@ const Blog = (props) => {
                 <img className='object-cover  w-full md:h-100 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
               </div>
               <p className='font-medium'>Date:- {item.date}</p>
-              <div className='flex gap-2 flex-wrap'>
+              <div className='flex gap-5 mt-2 flex-wrap'>
+                <button onClick={() => handleEdit(item._id)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Edit</button>
                 <button onClick={() => {
-                  if (window.confirm("Are you sure you want to delete this blog?")) { handleDelete(index) }
-                }} className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Delete</button>
-                <button onClick={() => handleEdit(index)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white'>Edit</button>
+                  if (window.confirm("Are you sure you want to delete this blog?")) { handleDelete(item._id) }
+                }} className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Delete</button>
               </div>
             </div>
           )
