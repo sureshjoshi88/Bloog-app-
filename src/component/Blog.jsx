@@ -133,6 +133,10 @@ const Blog = (props) => {
         console.log(result)
         handleapi()
         alert("blog add")
+        setTitle("")
+        setDescription("")
+        setImg("")
+        props.setDisplay(false)
       })
       .catch((error) => console.error(error));
   }
