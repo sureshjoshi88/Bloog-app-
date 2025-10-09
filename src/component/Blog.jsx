@@ -115,18 +115,21 @@ const Blog = (props) => {
     formdata.append("description", description);
     formdata.append("image", img);
 
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
     const requestOptions = {
       method: "POST",
       body: formdata,
+      headers: myHeaders,
       redirect: "follow"
     };
 
     fetch("http://localhost:8000/api/blogs/blog", requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
         console.log(result)
         handleapi()
-        alert("blog add")
+        alert(result.message)
         setTitle("")
         setDescription("")
         setImg("")
