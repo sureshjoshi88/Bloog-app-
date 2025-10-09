@@ -81,8 +81,11 @@ const Blog = (props) => {
 
   const handleDelete = (id) => {
     try {
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
       const requestOptions = {
         method: "DELETE",
+        headers: myHeaders,
         redirect: "follow"
       };
 
