@@ -40,27 +40,27 @@ const Blog = (props) => {
     e.preventDefault();
   }
 
-let token = JSON.parse(localStorage.getItem("token"))
+  let token = JSON.parse(localStorage.getItem("token"))
   const handleapi = async () => {
 
-const myHeaders = new Headers();
-myHeaders.append("Authorization", `Bearer ${token}`);
-myHeaders.append("Content-Type", "application/json");
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
 
 
-const requestOptions = {
-  method: "GET",
-  headers: myHeaders,
-  redirect: "follow"
-};
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    setArray(result.blog)
-    
-  })
-  .catch((error) => console.error(error));
+    fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setArray(result.blog)
+
+      })
+      .catch((error) => console.error(error));
 
   }
 
@@ -100,18 +100,7 @@ fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
 
   };
 
-  const handledescription = (e) => {
-    const descriptionValeu = e.target.value
-    if (descriptionValeu.length <= 100) {
-      setDescription(descriptionValeu);
-    } else {
-      setDescription('');
-      setError("⚠️ Aap 200 characters se zyada nahi likh sakte.")
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-    }
-  }
+
 
   const handleAddData = () => {
     if (!title || !description || !img) {
@@ -154,7 +143,7 @@ fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Seach by title and author...' id="" />
-        <p className='font-medium text-2xl'>Total Blog = {array?.length||0}</p>
+        <p className='font-medium text-2xl'>Total Blog = {array?.length || 0}</p>
       </div>
 
       {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
@@ -165,7 +154,7 @@ fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
           <input id='102' className='border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl' type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='enter a title' required /><br />
           <label htmlFor='103' className='font-semibold ps-2 text-xl'>despcrition</label><br />
-          <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={handledescription} placeholder='enter a description' max={10} required /><br />
+          <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
           <p className='font-medium text-red-600 p-1'>{error}</p>
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" onChange={(e) => setImg(e.target.files[0])} required /><br />
@@ -174,22 +163,32 @@ fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
       </div>
         : ""
       }
+
+
+
+
+
       {array?.length == 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
         <p className="text-xl font-bold mb-2">Authore Name</p>
         <p className='font-semibold'>Title</p>
         <p className="text-gray-600 font-medium">Description</p>
         <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="img" />
       </div> : ""}
-      {array==undefined&&<p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
+
+
+
+      {array == undefined && <p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
+
+
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array?.map((item, index) =>
             <div className={` ${theme === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
+              <div className=' mt-2 h-auto w-full  rounded '>
+                <img className='object-cover  w-full md:h-70 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
+              </div>
               <p className='font-medium'>Title:- {item.title}</p>
               <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
-              <div className=' mt-2 h-auto w-full  rounded '>
-                <img className='object-cover  w-full md:h-100 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
-              </div>
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-5 mt-2 flex-wrap'>
                 <button onClick={() => handleEdit(item._id)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Edit</button>
