@@ -1,51 +1,69 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/themeReducer';
 
-const Form = () => {
+const Form = (props) => {
   const {theme, setTheme} = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    mobile: '',
+    password: ''
   });
 
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
-    const newErrors = {};
+  // const validate = () => {
+  //   const newErrors = {};
 
-    if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-      newErrors.name = 'Name must contain only letters';
-    }
+  //   if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+  //     newErrors.name = 'Name must contain only letters';
+  //   }
 
-    if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,6}$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
+  //   if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,6}$/.test(formData.email)) {
+  //     newErrors.email = 'Invalid email format';
+  //   }
 
-    if (!/^[A-Za-z\d@$!%*#?&]{6,}$/.test(formData.password)) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
+  //   if (!/^[A-Za-z\d@$!%*#?&]{6,}$/.test(formData.password)) {
+  //     newErrors.password = 'Password must be at least 6 characters';
+  //   }
 
-    if (!/^\d{10}$/.test(formData.mobile)) {
-      newErrors.mobile = 'Mobile must be 10 digits';
-    }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    if (validate()) {
-      alert('Form submitted successfully!');
-      console.log(formData);
-      setFormData({ name: '', email: '', password: '', mobile: '' });
+    try {
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify(formData);
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+await fetch("http://localhost:8000/api/blogs/signup", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log("signup succesfull",result.token);
+    localStorage.setItem("token",JSON.stringify(result.token))
+      setFormData({ name: '', email: '', password: '' });
+    props.setDisplay(false)
+  })
+  } catch (error) {
+      console.log(error);
+      alert("problem signup falied")
+      
     }
+   
   };
 
   return (
@@ -95,22 +113,9 @@ const Form = () => {
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
 
-        {/* Mobile */}
-        <div className="mb-6">
-          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Mobile</label>
-          <input
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleChange}
-            className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            placeholder="Enter mobile number"
-          />
-          {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
-        </div>
-
         <button
           type="submit"
+          onClick={handleSubmit}
           className="w-full bg-blue-600 font-semibold text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
         >
           Submit

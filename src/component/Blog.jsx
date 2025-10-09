@@ -35,33 +35,35 @@ const Blog = (props) => {
   // // const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
 
 
-  // const mainbutton = () => {
-  //   if (name === "" || title === "" || description === "" || img === "") {
-  //     alert("please enter value")
-  //     props.setDisplay(false)
-
-  //   } 
-
-  // };
-
 
   const submit = (e) => {
     e.preventDefault();
   }
 
-
+let token = JSON.parse(localStorage.getItem("token"))
   const handleapi = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/blogs/blog?title=${search}`);
-      const data = await response.json();
-      setArray(data.blog);
-      
 
-    } catch (error) {
-      console.log(error);
+const myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${token}`);
+myHeaders.append("Content-Type", "application/json");
 
-    }
+
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    setArray(result.blog)
+    
+  })
+  .catch((error) => console.error(error));
+
   }
+
   useEffect(() => {
 
     handleapi()
