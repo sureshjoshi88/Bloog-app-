@@ -27,8 +27,6 @@ const Blog = (props) => {
   // // }
 
 
-
-
   // // const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
   // // const indexOfLastBlog = currentPage * blogsPerPage;
   // // const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
@@ -150,7 +148,7 @@ const Blog = (props) => {
         <p className='font-medium text-2xl'>Total Blog = {array?.length || 0}</p>
       </div>
 
-      {props.display === true ? <div className={`absolute z-50 md:w-150 sm:w-auto w-80    md:right-85 p-3 m-1 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 md:w-120 sm:w-auto w-auto    md:right-85 p-3 right-auto m-2 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
         <div className='flex justify-end'>
           <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
         </div>

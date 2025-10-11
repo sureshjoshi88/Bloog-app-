@@ -17,7 +17,7 @@ function App() {
    <Navbar  setDisplay={setDisplay} />
    <Routes>
     <Route path='/' element={<Blog  display={display} setDisplay={setDisplay} />}/>
-    <Route path='/from' element={<Form setDisplay={setDisplay} />}/>
+    <Route path='/signup' element={<Form setDisplay={setDisplay} />}/>
    </Routes>
    
     </>
