@@ -20,7 +20,7 @@ const Navbar = (props) => {
   }
   return (
 
-    <div className={`sticky top-0 w-full z-50 ${theme === "light" ? 'bg-white' : 'bg-gray-900'}`}>
+    <div className={`sticky top-0 w-full z-50 shadow ${theme === "light" ? 'bg-white' : 'bg-gray-900'}`}>
       <nav className='p-1 flex flex-wrap justify-around items-center  '>
         <div>
           <img className='w-20 h-20 cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/10026/10026257.png" alt="logo" />
