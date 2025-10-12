@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTheme } from '../context/themeReducer'
 
 const Login = () => {
       const {theme, setTheme} = useTheme()
-    
+      const [email,setEmail] = useState("");
+      const [password,setPassword] = useState('');
+      const [error,setError] = useState("")    
 
       const handleSubmit = (e)=>{
         e.preventDefault()
