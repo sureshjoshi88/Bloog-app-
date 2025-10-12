@@ -9,7 +9,12 @@ const Login = () => {
 
       const handleSubmit = (e)=>{
         e.preventDefault()
+        if(!email||!password){
+          alert("please enter a email and password")
+        }
       }
+
+  
   return (
     <div>
        <div className="flex items-center justify-center mt-4">
