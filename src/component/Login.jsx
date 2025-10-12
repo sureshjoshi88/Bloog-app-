@@ -24,10 +24,12 @@ const Login = () => {
           <input
             name="email"
             className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={email}
+            onChange={(e)=>{setEmail(e.target.value)}}
             type="email"
             placeholder="Enter your email"
           />
-          {/* {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>} */}
+          {error&& <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
 
         {/* Password */}
@@ -37,9 +39,11 @@ const Login = () => {
             name="password"
             className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
             placeholder="Enter password"
           />
-          {/* {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>} */}
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
 
         <button
