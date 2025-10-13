@@ -8,11 +8,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
 
-  const navigate = useNavigate( )
+  const navigate = useNavigate()
+  const errorHandle = ()=>{
+    setTimeout(() => {
+      setError("")
+    }, 3000);
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!email || !password) {
       alert("please enter a email and password")
+      return;
     }
 
     const myHeaders = new Headers();
@@ -35,10 +41,13 @@ const Login = () => {
       .then((result) => {
         if(!result.status){
           setError(result.message)
-         return alert(result.message)
+          alert(result.message)
+          errorHandle()
+          return;
         }
-        alert('login successfull')
         navigate("/")
+        alert(result.message)
+        errorHandle()
       })
       .catch((error) => console.log(error));
   }
