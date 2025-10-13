@@ -35,7 +35,7 @@ const Login = () => {
       .then((result) => {
         if(!result.status){
           setError(result.message)
-          alert(result.message)
+         return alert(result.message)
         }
         alert('login successfull')
         navigate("/")
