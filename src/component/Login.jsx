@@ -20,37 +20,42 @@ const Login = () => {
       alert("please enter a email and password")
       return;
     }
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-      "email": email,
-      "password": password
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow"
-    };
-
-    fetch("http://localhost:8000/api/auth/login", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        if(!result.status){
-          setError(result.message)
+try {
+  
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+  
+      const raw = JSON.stringify({
+        "email": email,
+        "password": password
+      });
+  
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+  
+      fetch("http://localhost:8000/api/auth/login", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          if(!result.status){
+            setError(result.message)
+            alert(result.message)
+            errorHandle()
+            return;
+          }
+          navigate("/")
           alert(result.message)
           errorHandle()
-          return;
-        }
-        navigate("/")
-        alert(result.message)
-        errorHandle()
-      })
-      .catch((error) => console.log(error));
-  }
+        })
+        .catch((error) => console.log(error));
+  
+} catch (error) {
+  
+} 
+ }
 
 
   return (
