@@ -76,8 +76,8 @@ try {
               onChange={(e) => { setEmail(e.target.value) }}
               type="email"
               placeholder="Enter your email"
+              required
             />
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
 
           {/* Password */}
@@ -90,6 +90,7 @@ try {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
+              required
             />
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
