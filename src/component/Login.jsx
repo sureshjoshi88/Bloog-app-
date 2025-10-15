@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from '../context/themeReducer'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
   const { theme, setTheme } = useTheme()
@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState("")
 
   const navigate = useNavigate()
-  const errorHandle = ()=>{
+  const errorHandle = () => {
     setTimeout(() => {
       setError("")
     }, 3000);
@@ -20,42 +20,44 @@ const Login = () => {
       alert("please enter a email and password")
       return;
     }
-try {
-  
+    try {
+
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-  
+
       const raw = JSON.stringify({
         "email": email,
         "password": password
       });
-  
+
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow"
       };
-  
+
       fetch("http://localhost:8000/api/auth/login", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-          if(!result.status){
+          if (!result.status) {
             setError(result.message)
-            alert(result.message)
             errorHandle()
+            setEmail("")
+            setPassword("")
             return;
           }
           navigate("/")
           alert(result.message)
+          setEmail("")
+          setPassword("")
           errorHandle()
         })
-        .catch((error) => console.log(error));
-  
-} catch (error) {
-  
-} 
- }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   return (
@@ -97,6 +99,7 @@ try {
 
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full bg-blue-600 font-semibold text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
           >
             Submit
