@@ -14,7 +14,7 @@ const Login = () => {
       setError("")
     }, 3000);
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     if (!email || !password) {
       alert("please enter a email and password")
@@ -37,8 +37,8 @@ const Login = () => {
         redirect: "follow"
       };
 
-      fetch("http://localhost:8000/api/auth/login", requestOptions)
-        .then((response) => response.json())
+     await fetch("http://localhost:8000/api/auth/login", requestOptions)
+        .then((response) =>  response.json())
         .then((result) => {
           if (!result.status) {
             setError(result.message)
@@ -47,6 +47,7 @@ const Login = () => {
             setPassword("")
             return;
           }
+          localStorage.setItem("token",JSON.stringify(result.token))
           navigate("/")
           alert(result.message)
           setEmail("")
