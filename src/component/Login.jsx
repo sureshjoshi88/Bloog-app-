@@ -60,6 +60,8 @@ const Login = () => {
     } catch (error) {
       console.log(error)
       setError(error.message)
+      setEmail("")
+      setPassword("")
     }
   }
 
