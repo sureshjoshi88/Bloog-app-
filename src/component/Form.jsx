@@ -56,6 +56,7 @@ const Form = (props) => {
         .then((result) => {
           if (!result.status) {
             toast.error(result.message)
+            setFormData({name:"",email:"",password:""})
           }
           console.log("signup succesfull", result.token);
           localStorage.setItem("token", JSON.stringify(result.token))
@@ -66,6 +67,7 @@ const Form = (props) => {
       console.log(error);
       // alert("problem signup falied")
       toast.error(error.message)
+      setFormData({name:"",email:"",password:""})
 
     }
 
