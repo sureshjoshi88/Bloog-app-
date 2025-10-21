@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/themeReducer';
+import { toast } from 'react-toastify';
 
 const Form = (props) => {
-  const {theme, setTheme} = useTheme()
+  const { theme, setTheme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,45 +36,49 @@ const Form = (props) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-const raw = JSON.stringify(formData);
+      const raw = JSON.stringify(formData);
 
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
 
-await fetch("http://localhost:8000/api/blogs/signup", requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    console.log("signup succesfull",result.token);
-    localStorage.setItem("token",JSON.stringify(result.token))
-      setFormData({ name: '', email: '', password: '' });
-    props.setDisplay(false)
-  })
-  } catch (error) {
+      await fetch("http://localhost:8000/api/blogs/signup", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          if (!result.status) {
+            toast.error(result.message)
+          }
+          console.log("signup succesfull", result.token);
+          localStorage.setItem("token", JSON.stringify(result.token))
+          setFormData({ name: '', email: '', password: '' });
+          props.setDisplay(false)
+        })
+    } catch (error) {
       console.log(error);
-      alert("problem signup falied")
-      
+      // alert("problem signup falied")
+      toast.error(error.message)
+
     }
-   
+
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit} className={`shadow-xl rounded-2xl p-8 w-full max-w-md ${theme==="light"?"bg-white":"bg-gray-800"}`}>
-        <h2 className={`text-2xl font-bold mb-6 text-center ${theme==="light"?"text-blue-600":""} `}>Registration Form</h2>
+      <form onSubmit={handleSubmit} className={`shadow-xl rounded-2xl p-8 w-full max-w-md ${theme === "light" ? "bg-white" : "bg-gray-800"}`}>
+        <h2 className={`text-2xl font-bold mb-6 text-center ${theme === "light" ? "text-blue-600" : ""} `}>Registration Form</h2>
 
         {/* Name */}
         <div className="mb-4">
-          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Name</label>
+          <label className={`block text-sm font-medium ${theme === "light" ? "text-gray-700" : "text-gray-100"} `}>Name</label>
           <input
             name="name"
             value={formData.name}
@@ -87,7 +92,7 @@ await fetch("http://localhost:8000/api/blogs/signup", requestOptions)
 
         {/* Email */}
         <div className="mb-4">
-          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Email</label>
+          <label className={`block text-sm font-medium ${theme === "light" ? "text-gray-700" : "text-gray-100"} `}>Email</label>
           <input
             name="email"
             value={formData.email}
@@ -101,7 +106,7 @@ await fetch("http://localhost:8000/api/blogs/signup", requestOptions)
 
         {/* Password */}
         <div className="mb-4">
-          <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-gray-100"} `}>Password</label>
+          <label className={`block text-sm font-medium ${theme === "light" ? "text-gray-700" : "text-gray-100"} `}>Password</label>
           <input
             name="password"
             value={formData.password}
