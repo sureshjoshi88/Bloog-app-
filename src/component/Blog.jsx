@@ -189,7 +189,7 @@ const Blog = (props) => {
               <div className=' mt-2 h-auto w-full  rounded '>
                 <img className='object-cover  w-full md:h-70 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
               </div>
-              <p className='font-medium'>Title:- {item.title}</p>
+              <p className='font-medium pt-2'>Title:- {item.title}</p>
               <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-5 mt-2 flex-wrap'>
