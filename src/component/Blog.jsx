@@ -69,10 +69,10 @@ const Blog = (props) => {
 
   const handleEdit = async (id) => {
     props.setDisplay(true);
-    if (!title || !description) {
-      alert("please fill the all filed")
-      return;
-    }
+    // if (!title || !description) {
+    //   alert("please fill the all filed")
+    //   return;
+    // }
     try {
       const formdata = new FormData();
       formdata.append("title", title);
@@ -98,22 +98,9 @@ const Blog = (props) => {
       props.setDisplay(false)
 
     } catch (error) {
-
+        alert(error.message)
     }
 
-
-    fetch(`http://localhost:8000/api/blogs/blog${id}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result)
-        handleapi()
-        alert(result.message)
-        setTitle("")
-        setDescription("")
-        setImg("")
-        props.setDisplay(false)
-      })
-      .catch((error) => console.error(error));
 
   };
 
