@@ -67,14 +67,8 @@ const Blog = (props) => {
     handleapi()
   }, [search]);
 
-  const handleEdit = (index) => {
-    const item = array[index];
-    setName(item.name);
-    setTitle(item.title);
-    setDescription(item.description);
-    setImg(item.img);
+  const handleEdit = (id) => {
     props.setDisplay(true);
-    setEditIndex(index);
   };
 
   const handleDelete = (id) => {
