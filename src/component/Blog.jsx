@@ -69,6 +69,37 @@ const Blog = (props) => {
 
   const handleEdit = (id) => {
     props.setDisplay(true);
+    if (!title || !description) {
+      alert("please fill the all filed")
+      return;
+    }
+    const formdata = new FormData();
+    formdata.append("title", title);
+    formdata.append("description", description);
+    formdata.append("image", img);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:8000/api/blogs/blog", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        handleapi()
+        alert(result.message)
+        setTitle("")
+        setDescription("")
+        setImg("")
+        props.setDisplay(false)
+      })
+      .catch((error) => console.error(error));
+
   };
 
   const handleDelete = (id) => {
