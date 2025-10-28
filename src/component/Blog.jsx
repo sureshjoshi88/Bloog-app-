@@ -67,27 +67,42 @@ const Blog = (props) => {
     handleapi()
   }, [search]);
 
-  const handleEdit = (id) => {
+  const handleEdit = async (id) => {
     props.setDisplay(true);
     if (!title || !description) {
       alert("please fill the all filed")
       return;
     }
-    const formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("description", description);
-    formdata.append("image", img);
+    try {
+      const formdata = new FormData();
+      formdata.append("title", title);
+      formdata.append("description", description);
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+      const requestOptions = {
+        method: "PUT",
+        body: formdata,
+        headers: myHeaders,
+        redirect: "follow"
+      };
 
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      headers: myHeaders,
-      redirect: "follow"
-    };
+      const data = await fetch(`http://localhost:8000/api/blogs/blog${id}`, requestOptions)
+      const response = await data.json();
+      console.log(response)
+      setArray(response.blog)
 
-    fetch("http://localhost:8000/api/blogs/blog", requestOptions)
+      handleapi()
+      alert(response.message)
+      setTitle("")
+      setDescription("")
+      props.setDisplay(false)
+
+    } catch (error) {
+
+    }
+
+
+    fetch(`http://localhost:8000/api/blogs/blog${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
