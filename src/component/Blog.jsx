@@ -168,10 +168,10 @@ const Blog = (props) => {
 
 
 
-      <div>
-        <form action="">
-          <input type="text" placeholder='Title'/>
-          <input type="text" placeholder='Description'/>
+      <div className='flex justify-center'>
+        <form action="" className='p-3 shadow-2xl'>
+          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Title'/><br />
+          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Description'/>
         </form>
       </div>
 
