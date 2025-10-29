@@ -166,6 +166,15 @@ const Blog = (props) => {
 
     <div className='relative'>
 
+
+
+      <div>
+        <form action="">
+          <input type="text" placeholder='Title'/>
+          <input type="text" placeholder='Description'/>
+        </form>
+      </div>
+
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Seach by title and author...' id="" />
