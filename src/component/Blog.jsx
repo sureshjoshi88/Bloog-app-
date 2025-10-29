@@ -213,7 +213,7 @@ const Blog = (props) => {
         {
           array?.map((item, index) =>
             <div className={` ${theme === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
-              <div className=' mt-2 h-auto w-full  rounded '>
+              <div className=' mt-2  w-full  rounded '>
                 <img className='object-cover  w-full md:h-70 md:object-contain  rounded-2xl  ' src={item.image} alt="" />
               </div>
               <p className='font-medium pt-2'>Title:- {item.title}</p>
