@@ -171,8 +171,8 @@ const Blog = (props) => {
       <div className='flex justify-center'>
         <form action="" className='p-3 shadow-2xl rounded'>
           <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Title'/><br />
-          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Description'/>
-          <button></button>
+          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Description'/><br />
+          <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold'>Update</button>
         </form>
       </div>
 
