@@ -15,6 +15,7 @@ const Blog = (props) => {
   const [error, setError] = useState("");
   const { theme, setTheme } = useTheme()
   const [search, setSearch] = useState("")
+  const [open,setOpen] = useState(false)
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -167,14 +168,14 @@ const Blog = (props) => {
     <div className='relative'>
 
 
-
-      <div className='flex justify-center'>
+{
+    open &&  <div className='flex justify-center'>
         <form action="" className='p-3 shadow-2xl rounded'>
           <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Title'/><br />
           <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" placeholder='Description'/><br />
           <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold'>Update</button>
         </form>
-      </div>
+      </div>}
 
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
