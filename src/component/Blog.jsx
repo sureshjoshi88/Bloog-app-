@@ -69,8 +69,7 @@ const Blog = (props) => {
   }, [search]);
 
   const handleEdit = async (id) => {
-    props.setDisplay(true);
- 
+      setOpen(true)
     try {
       const formdata = new FormData();
       formdata.append("title", title);
