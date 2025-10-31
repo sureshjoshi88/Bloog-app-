@@ -16,7 +16,7 @@ const Blog = (props) => {
   const { theme, setTheme } = useTheme()
   const [search, setSearch] = useState("")
   const [open,setOpen] = useState(false)
-  const {updateId ,setUpdateId} = useState("")
+  const [updateId ,setUpdateId] = useState("")
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -94,7 +94,7 @@ const Blog = (props) => {
         redirect: "follow"
       };
 
-      const data = await fetch(`http://localhost:8000/api/blogs/blog/${id}`, requestOptions)
+      const data = await fetch(`http://localhost:8000/api/blogs/blog/${updateId}`, requestOptions)
       const response = await data.json();
       console.log(response)
       setArray(response.blog)
@@ -180,8 +180,8 @@ const Blog = (props) => {
 {
     open &&  <div className='flex justify-center'>
         <form action="" className='p-3 shadow-2xl rounded'>
-          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" required placeholder='Title'/><br />
-          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" required placeholder='Description'/><br />
+          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e)=>setTitle(e.target.value)}  type="text" required placeholder='Title'/><br />
+          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e)=>setDescription(e.target.value)} type="text" required placeholder='Description'/><br />
           <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onCanPlay={handleUpdate} >Update</button>
         </form>
       </div>}
@@ -233,7 +233,7 @@ const Blog = (props) => {
               <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
               <p className='font-medium'>Date:- {item.date}</p>
               <div className='flex gap-5 mt-2 flex-wrap'>
-                <button onClick={() => handleEdit(item._id)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Edit</button>
+                <button onClick={() => handleEdit(item)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Edit</button>
                 <button onClick={() => {
                   if (window.confirm("Are you sure you want to delete this blog?")) { handleDelete(item._id) }
                 }} className='bg-red-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Delete</button>
