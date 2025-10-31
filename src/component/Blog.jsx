@@ -16,6 +16,7 @@ const Blog = (props) => {
   const { theme, setTheme } = useTheme()
   const [search, setSearch] = useState("")
   const [open,setOpen] = useState(false)
+  const {updateId ,setUpdateId} = useState("")
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -68,12 +69,19 @@ const Blog = (props) => {
     handleapi()
   }, [search]);
 
-  const handleEdit = async (id) => {
-    if(!title||!description){
+  const handleEdit =  (item) => {
+     setOpen(true)
+     setTitle(item.title)
+     setDescription(item.description)
+     setUpdateId(item.id)
+
+  };
+    const handleUpdate = async(e)=>{
+      e.preventDefault()
+        if(!title||!description){
       return
     }
-      setOpen(true)
-    try {
+      try {
       const formdata = new FormData();
       formdata.append("title", title);
       formdata.append("description", description);
@@ -86,7 +94,7 @@ const Blog = (props) => {
         redirect: "follow"
       };
 
-      const data = await fetch(`http://localhost:8000/api/blogs/blog${id}`, requestOptions)
+      const data = await fetch(`http://localhost:8000/api/blogs/blog/${id}`, requestOptions)
       const response = await data.json();
       console.log(response)
       setArray(response.blog)
@@ -101,8 +109,7 @@ const Blog = (props) => {
         alert(error.message)
     }
 
-
-  };
+    }
 
   const handleDelete = (id) => {
     try {
@@ -175,7 +182,7 @@ const Blog = (props) => {
         <form action="" className='p-3 shadow-2xl rounded'>
           <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" required placeholder='Title'/><br />
           <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' type="text" required placeholder='Description'/><br />
-          <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' >Update</button>
+          <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onCanPlay={handleUpdate} >Update</button>
         </form>
       </div>}
 
