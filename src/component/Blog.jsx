@@ -82,14 +82,12 @@ const Blog = (props) => {
       return
     }
       try {
-      const formdata = new FormData();
-      formdata.append("title", title);
-      formdata.append("description", description);
+    const body = JSON.stringify({ title, description });
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${token}`);
       const requestOptions = {
         method: "PUT",
-        body: formdata,
+        body: body,
         headers: myHeaders,
         redirect: "follow"
       };
