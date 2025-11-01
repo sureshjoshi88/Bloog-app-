@@ -87,7 +87,7 @@ const Blog = (props) => {
       myHeaders.append("Authorization", `Bearer ${token}`);
       const requestOptions = {
         method: "PUT",
-        body: body,
+        body,
         headers: myHeaders,
         redirect: "follow"
       };
@@ -104,6 +104,8 @@ const Blog = (props) => {
       setOpen(false)
     } catch (error) {
         alert(error.message)
+        console.log(error);
+        
     }
 
     }
