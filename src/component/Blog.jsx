@@ -15,9 +15,8 @@ const Blog = (props) => {
   const [error, setError] = useState("");
   const { theme, setTheme } = useTheme()
   const [search, setSearch] = useState("")
-  const [open,setOpen] = useState(false)
-  const [updateId ,setUpdateId] = useState("")
-  console.log(updateId)
+  const [open, setOpen] = useState(false)
+  const [updateId, setUpdateId] = useState("")
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -70,26 +69,26 @@ const Blog = (props) => {
     handleapi()
   }, [search]);
 
-  const handleEdit =  (item) => {
-     setOpen(true)
-     setTitle(item.title)
-     setDescription(item.description)
-     setUpdateId(item._id)
+  const handleEdit = (item) => {
+    setOpen(true)
+    setTitle(item.title)
+    setDescription(item.description)
+    setUpdateId(item._id)
 
   };
-    const handleUpdate = async(e)=>{
-      e.preventDefault()
-        if(!title||!description){
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    if (!title || !description) {
       return
     }
-      try {
-    const raw = JSON.stringify({ title, description });
+    try {
+      const raw = JSON.stringify({ title, description });
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${token}`);
       myHeaders.append("Content-Type", "application/json");
       const requestOptions = {
         method: "PUT",
-        body:raw,
+        body: raw,
         headers: myHeaders,
         redirect: "follow"
       };
@@ -105,12 +104,12 @@ const Blog = (props) => {
       setDescription("")
       setOpen(false)
     } catch (error) {
-        alert(error.message)
-        console.log(error);
-        
-    }
+      alert(error.message)
+      console.log(error);
 
     }
+
+  }
 
   const handleDelete = (id) => {
     try {
@@ -178,14 +177,14 @@ const Blog = (props) => {
     <div className='relative'>
 
 
-{
-    open &&  <div className='flex justify-center'>
-        <form action="" className='p-3 shadow-2xl rounded'>
-          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e)=>setTitle(e.target.value)}  type="text" required placeholder='Title'/><br />
-          <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e)=>setDescription(e.target.value)} type="text" required placeholder='Description'/><br />
-          <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >Update</button>
-        </form>
-      </div>}
+      {
+        open && <div className='flex justify-center'>
+          <form action="" className='p-3 shadow-2xl rounded'>
+            <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e) => setTitle(e.target.value)} type="text" required placeholder='Title' /><br />
+            <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e) => setDescription(e.target.value)} type="text" required placeholder='Description' /><br />
+            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >Update</button>
+          </form>
+        </div>}
 
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
@@ -210,15 +209,6 @@ const Blog = (props) => {
       </div>
         : ""
       }
-
-      {array?.length == 0 ? <div className='   bg-gray-200  shadow-md rounded-lg p-4 max-w-md mx-auto'>
-        <p className="text-xl font-bold mb-2">Authore Name</p>
-        <p className='font-semibold'>Title</p>
-        <p className="text-gray-600 font-medium">Description</p>
-        <img className='w-80 mt-2 rounded h-50' src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" alt="img" />
-      </div> : ""}
-
-
 
       {array == undefined && <p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
 
