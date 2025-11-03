@@ -17,6 +17,7 @@ const Blog = (props) => {
   const [search, setSearch] = useState("")
   const [open,setOpen] = useState(false)
   const [updateId ,setUpdateId] = useState("")
+  console.log(updateId)
   // const [viewMore, setViewMore] = useState(1);
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +74,7 @@ const Blog = (props) => {
      setOpen(true)
      setTitle(item.title)
      setDescription(item.description)
-     setUpdateId(item.id)
+     setUpdateId(item._id)
 
   };
     const handleUpdate = async(e)=>{
