@@ -82,12 +82,13 @@ const Blog = (props) => {
       return
     }
       try {
-    const body = JSON.stringify({ title, description });
+    const raw = JSON.stringify({ title, description });
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${token}`);
+      myHeaders.append("Content-Type", "application/json");
       const requestOptions = {
         method: "PUT",
-        body,
+        body:raw,
         headers: myHeaders,
         redirect: "follow"
       };
