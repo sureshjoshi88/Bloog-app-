@@ -4,9 +4,6 @@ import { useTheme } from '../context/themeReducer';
 
 
 const Blog = (props) => {
-
-
-
   const [array, setArray] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -17,23 +14,10 @@ const Blog = (props) => {
   const [search, setSearch] = useState("")
   const [open, setOpen] = useState(false)
   const [updateId, setUpdateId] = useState("")
-  // const [viewMore, setViewMore] = useState(1);
+  const [viewMore, setViewMore] = useState(1);
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const blogsPerPage = 3;
-
-
-
-  // // const handleViewMore = ()=>{
-  // //   setViewMore(viewMore + 1);
-  // // }
-
-
-  // // const totalPages = Math.ceil(filteredArray.length / blogsPerPage);
-  // // const indexOfLastBlog = currentPage * blogsPerPage;
-  // // const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  // // const filterData = filteredArray.slice(indexOfFirstBlog, indexOfLastBlog);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 3;
 
 
   const submit = (e) => {
