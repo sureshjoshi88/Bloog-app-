@@ -50,7 +50,6 @@ const Blog = (props) => {
     handleapi()
   }, [search]);
 
-  console.log(error)
   const handleEdit = (item) => {
     setOpen(true)
     setTitle(item.title)
@@ -79,7 +78,6 @@ const Blog = (props) => {
       const response = await data.json();
       console.log(response)
       setArray(response.blog)
-
       handleapi()
       alert(response.message)
       setTitle("")
