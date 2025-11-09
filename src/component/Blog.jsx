@@ -56,7 +56,7 @@ const Blog = (props) => {
     setTitle(item.title)
     setDescription(item.description)
     setUpdateId(item._id)
-
+      console.log('click')
   };
   const handleUpdate = async (e) => {
     e.preventDefault()
@@ -195,7 +195,7 @@ const Blog = (props) => {
 
       {array == undefined && <p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
 
-{array.length==0&&<p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
+{array?.length==0&&<p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array?.map((item, index) =>
