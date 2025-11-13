@@ -55,7 +55,6 @@ const Blog = (props) => {
     setTitle(item.title)
     setDescription(item.description)
     setUpdateId(item._id)
-      console.log('click')
   };
   const handleUpdate = async (e) => {
     e.preventDefault()
@@ -215,25 +214,6 @@ const Blog = (props) => {
         }
       </div>
 
-      {/* <div className='flex justify-center items-center gap-4 mt-5 mb-5'>
-        <button
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50 cursor-pointer'
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-
-        <span className='font-semibold'>Page {currentPage} of {totalPages}</span>
-
-        <button
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          className='bg-blue-500 p-2 rounded text-white disabled:opacity-50 cursor-pointer'
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div> */}
     </div>
   )
 }
