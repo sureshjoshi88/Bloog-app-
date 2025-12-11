@@ -172,9 +172,9 @@ const Blog = (props) => {
       </div>
 
 
-      {props.display === true ? <div className={`absolute z-50 md:w-120 sm:w-auto w-auto    md:right-85 p-3 right-auto m-2 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
+      {props.display === true ? <div className={`absolute z-50 md:w-120 sm:w-auto w-auto    md:right-85 top-30 p-5 right-auto m-2 rounded shadow-2xl shadow-blue-300 ${theme === 'light' ? 'bg-white' : 'bg-black'}`}>
         <div className='flex justify-end'>
-          <p className='text-2xl  bg-red-600 rounded text-white cursor-pointer ps-2 pe-2' onClick={() => props.setDisplay(false)}>X</p>
+          <p className='text-2xl  font-medium  rounded text-red-600 cursor-pointer p-1' onClick={() => props.setDisplay(false)}>x</p>
         </div>
         <form action="" onSubmit={submit}>
           <label htmlFor='102' className='font-semibold ps-2 text-xl'>title</label><br />
