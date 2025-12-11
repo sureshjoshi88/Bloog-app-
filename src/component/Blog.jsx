@@ -13,7 +13,7 @@ const Blog = (props) => {
   const [search, setSearch] = useState("")
   const [open, setOpen] = useState(false)
   const [updateId, setUpdateId] = useState("")
- 
+
 
 
   const submit = (e) => {
@@ -192,7 +192,7 @@ const Blog = (props) => {
 
       {array == undefined && <p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
 
-{array?.length==0&&<p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
+      {array?.length == 0 && <p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
         {
           array?.map((item, index) =>
