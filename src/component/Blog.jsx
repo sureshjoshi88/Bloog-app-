@@ -9,12 +9,10 @@ const Blog = (props) => {
   const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
   const [error, setError] = useState("");
-  const { theme, setTheme } = useTheme()
-  const [search, setSearch] = useState("")
-  const [open, setOpen] = useState(false)
-  const [updateId, setUpdateId] = useState("")
-
-
+  const { theme, setTheme } = useTheme();
+  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
+  const [updateId, setUpdateId] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
