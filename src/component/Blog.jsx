@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 import { useTheme } from '../context/themeReducer';
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Blog = (props) => {
@@ -13,6 +14,7 @@ const Blog = (props) => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [updateId, setUpdateId] = useState("");
+  const [loading,setLoading] = useState(false)
 
   const submit = (e) => {
     e.preventDefault();
@@ -36,7 +38,6 @@ const Blog = (props) => {
       .then((response) => response.json())
       .then((result) => {
         setArray(result.blog)
-
       })
       .catch((error) => {
         console.log(error)
@@ -44,6 +45,7 @@ const Blog = (props) => {
 
   }
 
+  console.log(array)
   useEffect(() => {
     handleapi()
   }, [search]);
@@ -119,6 +121,7 @@ const Blog = (props) => {
       alert("please fill the all filed")
       return;
     }
+    setLoading(true)
     const formdata = new FormData();
     formdata.append("title", title);
     formdata.append("description", description);
@@ -144,7 +147,10 @@ const Blog = (props) => {
         setImg("")
         props.setDisplay(false)
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(()=>{
+        setLoading(false)
+      })
   }
 
   return (
@@ -181,7 +187,7 @@ const Blog = (props) => {
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" onChange={(e) => setImg(e.target.files[0])} required /><br />
-          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>Submit</button>
+          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>{!loading?"Submit":<ClipLoader color='white' size={20}/>}</button>
         </form>
       </div>
         : ""
