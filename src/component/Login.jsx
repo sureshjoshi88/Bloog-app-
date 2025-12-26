@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTheme } from '../context/themeReducer'
 import { useNavigate } from "react-router-dom"
+import { useSelector,useDispatch } from 'react-redux'
 
 const Login = () => {
   const { theme, setTheme } = useTheme()
