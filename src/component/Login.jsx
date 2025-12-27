@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { useTheme } from '../context/themeReducer'
 import { useNavigate } from "react-router-dom"
 import { useSelector,useDispatch } from 'react-redux'
+import { loginUser } from '../redux/loginSlice/loginSlice'
 
 const Login = () => {
   const { theme, setTheme } = useTheme()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
-  const [error, setError] = useState("")
+  // const [error, setError] = useState("")
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -25,50 +26,55 @@ const Login = () => {
       alert("please enter a email and password")
       return;
     }
-    try {
 
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+    dispatch(loginUser({email,password}))
 
-      const raw = JSON.stringify({
-        "email": email,
-        "password": password
-      });
+    // try {
 
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-      };
+    //   const myHeaders = new Headers();
+    //   myHeaders.append("Content-Type", "application/json");
 
-      await fetch("http://localhost:8000/api/auth/login", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          if (!result.status) {
-            setError(result.message)
-            errorHandle()
-            setEmail("")
-            setPassword("")
-            return;
-          }
-          localStorage.setItem("token", JSON.stringify(result.token))
-          navigate("/")
-          alert(result.message)
-          setEmail("")
-          setPassword("")
-          errorHandle()
-        })
+    //   const raw = JSON.stringify({
+    //     "email": email,
+    //     "password": password
+    //   });
 
-    } catch (error) {
-      console.log(error)
-      setError(error.message)
-      setEmail("")
-      setPassword("")
-    }
+    //   const requestOptions = {
+    //     method: "POST",
+    //     headers: myHeaders,
+    //     body: raw,
+    //     redirect: "follow"
+    //   };
+
+    //   await fetch("http://localhost:8000/api/auth/login", requestOptions)
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       if (!result.status) {
+    //         setError(result.message)
+    //         errorHandle()
+    //         setEmail("")
+    //         setPassword("")
+    //         return;
+    //       }
+    //       localStorage.setItem("token", JSON.stringify(result.token))
+    //       navigate("/")
+    //       alert(result.message)
+    //       setEmail("")
+    //       setPassword("")
+    //       errorHandle()
+    //     })
+
+    // } catch (error) {
+    //   console.log(error)
+    //   setError(error.message)
+    //   setEmail("")
+    //   setPassword("")
+    // }
   }
 
 
+  const {logout,user,loading,error,token} = useSelector(state=>state.auth)
+  console.log(user,error)
   return (
     <div>
       <div className="flex items-center justify-center mt-4">

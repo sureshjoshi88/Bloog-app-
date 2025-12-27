@@ -20,7 +20,8 @@ const Blog = (props) => {
     e.preventDefault();
   }
 
-  let token = JSON.parse(localStorage.getItem("token"))
+  let token = localStorage.getItem("token")
+
   const handleapi = async () => {
 
     const myHeaders = new Headers();
@@ -56,6 +57,7 @@ const Blog = (props) => {
     setDescription(item.description)
     setUpdateId(item._id)
   };
+
   const handleUpdate = async (e) => {
     e.preventDefault()
     if (!title || !description) {

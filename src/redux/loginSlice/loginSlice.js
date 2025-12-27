@@ -4,7 +4,7 @@ import axios from "axios"
 export const loginUser = createAsyncThunk('auth/loginUser', async (formData, { rejectWithValue }) => {
     try {
         const response = await axios.post("http://localhost:8000/api/auth/login", formData);
-        return response
+        return response.data
     } catch (error) {
         return rejectWithValue(error.response.data.message);
     }
@@ -50,4 +50,4 @@ const loginSlice = createSlice({
 })
 
 export const { logout } = loginSlice.actions;
-export default loginSlice
+export default loginSlice.reducer
