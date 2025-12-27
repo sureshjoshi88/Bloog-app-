@@ -10,6 +10,8 @@ const Login = () => {
   const [error, setError] = useState("")
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
 
   const errorHandle = () => {
     setTimeout(() => {
