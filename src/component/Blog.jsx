@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 import { useTheme } from '../context/themeReducer';
 import ClipLoader from "react-spinners/ClipLoader";
+import { useSelector } from 'react-redux';
 
 
 const Blog = (props) => {
@@ -20,7 +21,7 @@ const Blog = (props) => {
     e.preventDefault();
   }
 
-  let token = localStorage.getItem("token")
+  const {user,token} = useSelector(state=>state.auth)
 
   const handleapi = async () => {
 
