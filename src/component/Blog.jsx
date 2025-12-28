@@ -46,8 +46,6 @@ const Blog = (props) => {
       });
 
   }
-
-  console.log(array)
   useEffect(() => {
     handleapi()
   }, [search]);
