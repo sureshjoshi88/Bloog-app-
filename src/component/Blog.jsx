@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 import { useTheme } from '../context/themeReducer';
 import ClipLoader from "react-spinners/ClipLoader";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBlog } from '../redux/userSlice/getBlog';
 
 
 const Blog = (props) => {
@@ -10,18 +11,19 @@ const Blog = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
-  const [error, setError] = useState("");
   const { theme, setTheme } = useTheme();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [updateId, setUpdateId] = useState("");
-  const [loading,setLoading] = useState(false)
+  // const [loading,setLoading] = useState(false)
+
+  const dispatch = useDispatch()
 
   const submit = (e) => {
     e.preventDefault();
   }
 
-  const {user,token} = useSelector(state=>state.auth)
+  const {user,token,} = useSelector(state=>state.auth)
 
   const handleapi = async () => {
 
@@ -46,8 +48,11 @@ const Blog = (props) => {
       });
 
   }
+
   useEffect(() => {
-    handleapi()
+    // handleapi()
+    dispatch(getBlog(search))
+    
   }, [search]);
 
   const handleEdit = (item) => {
@@ -154,6 +159,9 @@ const Blog = (props) => {
       })
   }
 
+  const {blog,error,loading} = useSelector(state=>state.allBlogs)
+console.log(blog.blog,'fef')
+
   return (
 
 
@@ -173,7 +181,7 @@ const Blog = (props) => {
       <div className='flex justify-center md:gap-20 flex-wrap mt-5 mb-2'>
         <input type="search" name="" className={`border-2 font-semibold border-blue-500 h-10 w-100 p-2 rounded-3xl mb-4 outline-0`}
           value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Seach by title and author...' id="" />
-        <p className='font-medium text-2xl'>Total Blog = {array?.length || 0}</p>
+        <p className='font-medium text-2xl'>Total Blog = {blog?.blog?.length || 0}</p>
       </div>
 
 
@@ -194,13 +202,17 @@ const Blog = (props) => {
         : ""
       }
 
+{loading && (
+  <div className="flex justify-center mt-10">
+    <ClipLoader size={40} />
+  </div>
+)}
+      {error && <p className='text-2xl font-semibold text-center mt-10'>{error}</p>}
 
-      {array == undefined && <p className='text-2xl font-semibold text-center mt-10'>no blog found</p>}
-
-      {array?.length == 0 && <p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
+      {blog?.blog?.length == 0 && <p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}
       <div className=' grid md:grid-cols-3 gap-4 p-1'>
-        {
-          array?.map((item, index) =>
+        {!loading && !error &&
+          blog?.blog?.map((item, index) =>
             <div className={` ${theme === 'light' ? 'bg-gray-200 ' : 'bg-gray-800'} shadow-md rounded-lg p-4`} key={index}>
               <div className=' mt-2  w-full  rounded '>
                 <img className='object-cover  w-full md:h-50  rounded-2xl  ' src={item.image} alt="" />
