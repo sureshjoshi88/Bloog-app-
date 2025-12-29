@@ -23,7 +23,7 @@ const Blog = (props) => {
     e.preventDefault();
   }
 
-  const {user,token,} = useSelector(state=>state.auth)
+  const { user, token, } = useSelector(state => state.auth)
 
   const handleapi = async () => {
 
@@ -52,7 +52,7 @@ const Blog = (props) => {
   useEffect(() => {
     // handleapi()
     dispatch(getBlog(search))
-    
+
   }, [search]);
 
   const handleEdit = (item) => {
@@ -154,13 +154,13 @@ const Blog = (props) => {
         props.setDisplay(false)
       })
       .catch((error) => console.error(error))
-      .finally(()=>{
+      .finally(() => {
         setLoading(false)
       })
   }
 
-  const {blog,error,loading} = useSelector(state=>state.allBlogs)
-console.log(blog.blog,'fef')
+  const { blog, error, loading } = useSelector(state => state.allBlogs)
+  console.log(blog.blog, 'fef')
 
   return (
 
@@ -196,17 +196,17 @@ console.log(blog.blog,'fef')
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" onChange={(e) => setImg(e.target.files[0])} required /><br />
-          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>{!loading?"Submit":<ClipLoader color='white' size={20}/>}</button>
+          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>{!loading ? "Submit" : <ClipLoader color='white' size={20} />}</button>
         </form>
       </div>
         : ""
       }
 
-{loading && (
-  <div className="flex justify-center mt-10">
-    <ClipLoader size={40} />
-  </div>
-)}
+      {loading && (
+        <div className="flex justify-center mt-10">
+          <ClipLoader size={40} />
+        </div>
+      )}
       {error && <p className='text-2xl font-semibold text-center mt-10'>{error}</p>}
 
       {blog?.blog?.length == 0 && <p className='font-medium text-2xl text-center p-6'>Something went wrong</p>}

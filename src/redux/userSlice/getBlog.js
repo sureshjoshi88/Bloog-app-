@@ -14,7 +14,7 @@ export const getBlog = createAsyncThunk('blog', async (search, { rejectWithValue
         })
         return response.data
     } catch (error) {
-        return rejectWithValue(error?.response?.data?.message);
+        return rejectWithValue(error?.response?.data?.message||'something went wrong ');
 
     }
 
