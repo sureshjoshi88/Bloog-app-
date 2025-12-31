@@ -41,6 +41,9 @@ const Navbar = (props) => {
           {theme === "light" ? <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><FaMoon /></button> :
             <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
+        <div>
+          <button>Logout</button>
+        </div>
       </nav>
     </div>
   )
