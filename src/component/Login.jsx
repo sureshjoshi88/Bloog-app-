@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useTheme } from '../context/themeReducer'
 import { useNavigate } from "react-router-dom"
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { loginUser } from '../redux/loginSlice/loginSlice'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Login = () => {
   const { theme, setTheme } = useTheme()
@@ -12,7 +13,7 @@ const Login = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
+
 
   const errorHandle = () => {
     setTimeout(() => {
@@ -20,14 +21,38 @@ const Login = () => {
     }, 3000);
   }
 
+  const { user, loading, error } = useSelector(state => state.auth)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!email || !password) {
-      alert("please enter a email and password")
-      return;
+    try {
+      if (!email || !password) {
+        alert("please enter a email and password")
+        return;
+      }
+
+      dispatch(loginUser({ email, password }))
+      if (error) {
+        setError(error.message)
+        errorHandle()
+        setEmail("")
+        setPassword("")
+        return;
+      }else{
+        // navigate("/")
+        alert(user.message)
+        setEmail("")
+        setPassword("")
+        errorHandle()
+      }
+
+    } catch (error) {
+      console.log(error)
+      setError(error.message)
+      setEmail("")
+      setPassword("")
     }
 
-    dispatch(loginUser({email,password}))
 
     // try {
 
@@ -73,8 +98,7 @@ const Login = () => {
   }
 
 
-  const {logout,user,loading,error,token} = useSelector(state=>state.auth)
-  console.log(user,error)
+  console.log(user, error,"gg")
   return (
     <div>
       <div className="flex items-center justify-center mt-4">
@@ -114,11 +138,10 @@ const Login = () => {
 
           <button
             type="submit"
-            onClick={handleSubmit}
             className="w-full bg-blue-600 font-semibold text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
           >
-            Submit
-          </button>
+            {loading ? <ClipLoader /> : "Submit"
+            }          </button>
         </form>
       </div>
     </div>
