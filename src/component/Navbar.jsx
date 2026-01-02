@@ -42,7 +42,7 @@ const Navbar = (props) => {
             <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
         <div>
-          <button>Logout</button>
+          <button className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
         </div>
       </nav>
     </div>
