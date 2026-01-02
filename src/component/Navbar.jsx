@@ -3,6 +3,8 @@ import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/themeReducer';
+import {useDispatch, useSelector} from "react-redux"
+import { logout } from '../redux/loginSlice/loginSlice';
 
 
 const Navbar = (props) => {
@@ -18,6 +20,9 @@ const Navbar = (props) => {
       setTheme("light")
     }
   }
+  const dispatch = useDispatch()
+  const {token} = useSelector(state=>state.auth)
+  console.log(token)
   return (
 
     <div className={`sticky top-0 w-full z-50 shadow ${theme === "light" ? 'bg-white' : 'bg-gray-900'}`}>
@@ -41,9 +46,9 @@ const Navbar = (props) => {
           {theme === "light" ? <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><FaMoon /></button> :
             <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
-        <div>
-          <button className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
-        </div>
+      { token && <div>
+          <button onClick={dispatch(logout())} className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
+        </div>}
       </nav>
     </div>
   )
