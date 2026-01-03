@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useTheme } from '../context/themeReducer'
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,7 +9,7 @@ const Login = () => {
   const { theme, setTheme } = useTheme()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState("")
+  const [errors, setErrors] = useState("")
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const Login = () => {
 
   const errorHandle = () => {
     setTimeout(() => {
-      setError("")
+      setErrors("")
     }, 3000);
   }
 
@@ -25,33 +25,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
       if (!email || !password) {
         alert("please enter a email and password")
         return;
       }
 
       dispatch(loginUser({ email, password }))
-      if (error) {
-        setError(error.message)
-        errorHandle()
-        setEmail("")
-        setPassword("")
-        return;
-      }else{
-        // navigate("/")
-        alert(user.message)
-        setEmail("")
-        setPassword("")
-        errorHandle()
-      }
+  
 
-    } catch (error) {
-      console.log(error)
-      setError(error.message)
-      setEmail("")
-      setPassword("")
-    }
+    
 
 
     // try {
@@ -75,7 +57,7 @@ const Login = () => {
     //     .then((response) => response.json())
     //     .then((result) => {
     //       if (!result.status) {
-    //         setError(result.message)
+    //         setErrors(result.message)
     //         errorHandle()
     //         setEmail("")
     //         setPassword("")
@@ -91,12 +73,28 @@ const Login = () => {
 
     // } catch (error) {
     //   console.log(error)
-    //   setError(error.message)
+    //   setErrors(error.message)
     //   setEmail("")
     //   setPassword("")
     // }
   }
 
+  useEffect(()=>{
+    if (error) {
+        setErrors(error)
+        errorHandle()
+        setEmail("")
+        setPassword("")
+        return
+      }
+      if(user){
+        navigate("/")
+        alert(user.message)
+        setEmail("")
+        setPassword("")
+        errorHandle()
+      }
+  },[error,user])
 
   console.log(user, error,"gg")
   return (
@@ -133,7 +131,7 @@ const Login = () => {
               placeholder="Enter password"
               required
             />
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            {errors && <p className="text-red-500 text-sm mt-1">{errors}</p>}
           </div>
 
           <button

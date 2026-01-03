@@ -6,14 +6,14 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (formData, { r
         const response = await axios.post("http://localhost:8000/api/auth/login", formData);
         return response.data
     } catch (error) {
-        return rejectWithValue(error.response.data.message);
+        return rejectWithValue(error.response?.data?.message || "login failed");
     }
 
 });
 
 
 const loginSlice = createSlice({
-    name: "loginUser",
+    name: "login",
     initialState: {
         user: null,
         token: localStorage.getItem("token") || null,
@@ -36,7 +36,6 @@ const loginSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = false,
-                    state.error = null,
                     state.user = action.payload.user,
                     state.token = action.payload.token,
                     localStorage.setItem('token', action.payload.token)
