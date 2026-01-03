@@ -15,7 +15,6 @@ const Blog = (props) => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [updateId, setUpdateId] = useState("");
-  // const [loading,setLoading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -127,7 +126,6 @@ const Blog = (props) => {
       alert("please fill the all filed")
       return;
     }
-    setLoading(true)
     const formdata = new FormData();
     formdata.append("title", title);
     formdata.append("description", description);
@@ -155,7 +153,6 @@ const Blog = (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => {
-        setLoading(false)
       })
   }
 

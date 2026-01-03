@@ -25,15 +25,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-      if (!email || !password) {
-        alert("please enter a email and password")
-        return;
-      }
+    if (!email || !password) {
+      alert("please enter a email and password")
+      return;
+    }
 
-      dispatch(loginUser({ email, password }))
-  
+    dispatch(loginUser({ email, password }))
 
-    
+
+
 
 
     // try {
@@ -79,24 +79,24 @@ const Login = () => {
     // }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (error) {
-        setErrors(error)
-        errorHandle()
-        setEmail("")
-        setPassword("")
-        return
-      }
-      if(user){
-        navigate("/")
-        alert(user.message)
-        setEmail("")
-        setPassword("")
-        errorHandle()
-      }
-  },[error,user])
+      setErrors(error)
+      errorHandle()
+      setEmail("")
+      setPassword("")
+    }
 
-  console.log(user, error,"gg")
+    if (user) {
+      navigate("/")
+      alert(user.message)
+      setEmail("")
+      setPassword("")
+      errorHandle()
+    }
+  }, [error, user])
+
+  console.log(user, error, "gg")
   return (
     <div>
       <div className="flex items-center justify-center mt-4">
