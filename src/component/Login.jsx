@@ -89,14 +89,12 @@ const Login = () => {
 
     if (user) {
       navigate("/")
-      alert(user.message)
+      alert("login successfull")
       setEmail("")
       setPassword("")
       errorHandle()
     }
   }, [error, user])
-
-  console.log(user, error, "gg")
   return (
     <div>
       <div className="flex items-center justify-center mt-4">
