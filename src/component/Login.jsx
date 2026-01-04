@@ -32,51 +32,6 @@ const Login = () => {
 
     dispatch(loginUser({ email, password }))
 
-
-
-
-
-    // try {
-
-    //   const myHeaders = new Headers();
-    //   myHeaders.append("Content-Type", "application/json");
-
-    //   const raw = JSON.stringify({
-    //     "email": email,
-    //     "password": password
-    //   });
-
-    //   const requestOptions = {
-    //     method: "POST",
-    //     headers: myHeaders,
-    //     body: raw,
-    //     redirect: "follow"
-    //   };
-
-    //   await fetch("http://localhost:8000/api/auth/login", requestOptions)
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       if (!result.status) {
-    //         setErrors(result.message)
-    //         errorHandle()
-    //         setEmail("")
-    //         setPassword("")
-    //         return;
-    //       }
-    //       localStorage.setItem("token", JSON.stringify(result.token))
-    //       navigate("/")
-    //       alert(result.message)
-    //       setEmail("")
-    //       setPassword("")
-    //       errorHandle()
-    //     })
-
-    // } catch (error) {
-    //   console.log(error)
-    //   setErrors(error.message)
-    //   setEmail("")
-    //   setPassword("")
-    // }
   }
 
   useEffect(() => {
@@ -94,7 +49,7 @@ const Login = () => {
       setPassword("")
       errorHandle()
     }
-  }, [error, user])
+  }, [error])
   return (
     <div>
       <div className="flex items-center justify-center mt-4">
@@ -136,7 +91,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-600 font-semibold text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
           >
-            {loading ? <ClipLoader /> : "Submit"
+            {loading ? <ClipLoader color='#ffff' className='font-medium'  /> : "Submit"
             }          </button>
         </form>
       </div>
