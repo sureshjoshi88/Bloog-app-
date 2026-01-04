@@ -3,18 +3,18 @@ import axios from "axios";
 
 
 
-export const getBlog = createAsyncThunk('blog', async (search, { rejectWithValue ,getState}) => {
+export const getBlog = createAsyncThunk('blog', async (search, { rejectWithValue, getState }) => {
     try {
-              const token = getState().auth.token;
-        const response = await axios.get(`http://localhost:8000/api/blogs/blog?title=${search}`,{
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+        const token = getState().auth.token;
+        const response = await axios.get(`http://localhost:8000/api/blogs/blog?title=${search}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
         })
         return response.data
     } catch (error) {
-        return rejectWithValue(error?.response?.data?.message||'something went wrong ');
+        return rejectWithValue(error?.response?.data?.message || 'something went wrong ');
 
     }
 
