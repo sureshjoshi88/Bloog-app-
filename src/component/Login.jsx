@@ -49,7 +49,7 @@ const Login = () => {
       setPassword("")
       errorHandle()
     }
-  }, [error])
+  }, [error,user])
   return (
     <div>
       <div className="flex items-center justify-center mt-4">

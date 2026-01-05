@@ -3,8 +3,9 @@ import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/themeReducer';
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { logout } from '../redux/loginSlice/loginSlice';
+import { FaRegUserCircle } from "react-icons/fa";
 
 
 const Navbar = (props) => {
@@ -21,7 +22,7 @@ const Navbar = (props) => {
     }
   }
   const dispatch = useDispatch()
-  const {token} = useSelector(state=>state.auth)
+  const { token } = useSelector(state => state.auth)
   console.log(token)
   return (
 
@@ -46,8 +47,14 @@ const Navbar = (props) => {
           {theme === "light" ? <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><FaMoon /></button> :
             <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
-      { token && <div>
-          <button onClick={()=>{dispatch(logout())}} className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
+        {token && <div>
+          <button onClick={() => { dispatch(logout()) }} className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
+        </div>}
+        <p><FaRegUserCircle className='font-medium text-3xl cursor-pointer' /></p>
+        {<div>
+          <button><NavLink className={({ isActive }) => isActive ? "border-b-2 text-blue-500 font-medium text-lg" : "font-medium text-lg"} to='/login'>Login</NavLink>
+          </button>
+          <button>Logout</button>
         </div>}
       </nav>
     </div>
