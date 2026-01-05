@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 
 const Navbar = (props) => {
   const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+
   const handleColor = () => {
     if (theme === "light") {
       document.body.style.backgroundColor = "#181a1a";
@@ -47,15 +49,36 @@ const Navbar = (props) => {
           {theme === "light" ? <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><FaMoon /></button> :
             <button className='font-bold text-2xl cursor-pointer' onClick={handleColor}><BsFillSunFill /></button>}
         </div>
-        {token && <div>
-          <button onClick={() => { dispatch(logout()) }} className='shadow shadow-black cursor-pointer px-4 p-1.5 rounded bg-blue-600 text-white font-medium'>Logout</button>
-        </div>}
-        <p><FaRegUserCircle className='font-medium text-3xl cursor-pointer' /></p>
-        {<div>
-          <button><NavLink className={({ isActive }) => isActive ? "border-b-2 text-blue-500 font-medium text-lg" : "font-medium text-lg"} to='/login'>Login</NavLink>
-          </button>
-          <button>Logout</button>
-        </div>}
+        <div className="relative">
+          <FaRegUserCircle
+            onClick={() => setOpen(!open)}
+            className="text-3xl cursor-pointer text-gray-700 hover:text-black transition"
+          />
+
+          {/* Dropdown */}
+          {open && (
+            <div className="absolute right-0 mt-3 w-40 bg-white  rounded-xl shadow-lg z-20 overflow-hidden p-1">
+
+              <NavLink
+                to="/login"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-gray-400 hover:border-b transition"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </NavLink>
+              {token &&
+                <button
+                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition"
+                  onClick={() => { dispatch(logout()) }}
+                >
+                  Logout
+                </button>
+              }
+
+            </div>
+          )}
+        </div>
+
       </nav>
     </div>
   )
