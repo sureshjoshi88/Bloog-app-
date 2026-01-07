@@ -57,17 +57,17 @@ const Navbar = (props) => {
           {/* Dropdown */}
           {open && (
             <div className="absolute right-0 mt-3 w-40 bg-white  rounded-xl shadow-lg z-20 overflow-hidden p-1">
-
+              {!token ?
               <NavLink
                 to="/login"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-gray-400 hover:border-b transition"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-gray-400 hover:border-b transition font-medium"
                 onClick={() => setOpen(false)}
               >
                 Login
               </NavLink>
-              {token &&
+              :
                 <button
-                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition"
+                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition font-medium"
                   onClick={() => { dispatch(logout()) }}
                 >
                   Logout
