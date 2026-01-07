@@ -37,7 +37,6 @@ const Navbar = (props) => {
           <ul className='flex gap-7'>
             <li><NavLink className={({ isActive }) => isActive ? "border-b-2 text-blue-500 font-medium text-lg" : "font-medium text-lg"} to='/'>Home</NavLink></li>
             <li><NavLink className={({ isActive }) => isActive ? "border-b-2 text-blue-500 font-medium text-lg" : "font-medium text-lg"} to='/signup'>Sign Up</NavLink></li>
-            <li><NavLink className={({ isActive }) => isActive ? "border-b-2 text-blue-500 font-medium text-lg" : "font-medium text-lg"} to='/login'>Login</NavLink></li>
           </ul>
         </div>
         <div className='p-2 '>
