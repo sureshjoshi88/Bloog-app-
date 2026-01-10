@@ -23,30 +23,10 @@ const Blog = (props) => {
   }
 
   const { user, token, } = useSelector(state => state.auth)
-
-  const handleapi = async () => {
-
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Content-Type", "application/json");
+  const { blog, loading, error } = useSelector(state => state.allBlogs)
 
 
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    };
-
-    fetch(`http://localhost:8000/api/blogs/blog?title=${search}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setArray(result.blog)
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-
-  }
+  
 
   useEffect(() => {
     // handleapi()
@@ -156,7 +136,6 @@ const Blog = (props) => {
       })
   }
 
-  const { blog, error, loading } = useSelector(state => state.allBlogs)
   console.log(blog.blog, 'fef')
 
   return (
