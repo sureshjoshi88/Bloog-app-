@@ -7,7 +7,6 @@ import { getBlog } from '../redux/userSlice/getBlog';
 
 
 const Blog = (props) => {
-  const [array, setArray] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
@@ -60,7 +59,6 @@ const Blog = (props) => {
       const data = await fetch(`http://localhost:8000/api/blogs/blog/${updateId}`, requestOptions)
       const response = await data.json();
       console.log(response)
-      setArray(response.blog)
       alert(response.message)
       setTitle("")
       setDescription("")
