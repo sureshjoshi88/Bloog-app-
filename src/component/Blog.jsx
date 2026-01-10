@@ -26,10 +26,9 @@ const Blog = (props) => {
   const { blog, loading, error } = useSelector(state => state.allBlogs)
 
 
-  
+
 
   useEffect(() => {
-    // handleapi()
     dispatch(getBlog(search))
 
   }, [search]);
@@ -62,7 +61,6 @@ const Blog = (props) => {
       const response = await data.json();
       console.log(response)
       setArray(response.blog)
-      handleapi()
       alert(response.message)
       setTitle("")
       setDescription("")
@@ -124,7 +122,6 @@ const Blog = (props) => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
-        handleapi()
         alert(result.message)
         setTitle("")
         setDescription("")
