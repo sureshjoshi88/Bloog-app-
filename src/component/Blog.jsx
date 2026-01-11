@@ -4,6 +4,7 @@ import { useTheme } from '../context/themeReducer';
 import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
+import { addBlog } from '../redux/userSlice/addBlog';
 
 
 const Blog = (props) => {
@@ -23,8 +24,9 @@ const Blog = (props) => {
 
   const { user, token, } = useSelector(state => state.auth)
   const { blog, loading, error } = useSelector(state => state.allBlogs)
+  const { blogs, isloading, iserror } = useSelector(state => state.addBlogs)
 
-
+  console.log(blog,'dd')
 
 
   useEffect(() => {
@@ -106,29 +108,31 @@ const Blog = (props) => {
     formdata.append("title", title);
     formdata.append("description", description);
     formdata.append("image", img);
+    console.log(formdata)
+    dispatch(addBlog(formdata))
+    // const myHeaders = new Headers();
+    // myHeaders.append("Authorization", `Bearer ${token}`);
 
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      headers: myHeaders,
-      redirect: "follow"
-    };
+    // const requestOptions = {
+    //   method: "POST",
+    //   body: formdata,
+    //   headers: myHeaders,
+    //   redirect: "follow"
+    // };
 
-    fetch("http://localhost:8000/api/blogs/blog", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result)
-        alert(result.message)
-        setTitle("")
-        setDescription("")
-        setImg("")
-        props.setDisplay(false)
-      })
-      .catch((error) => console.error(error))
-      .finally(() => {
-      })
+    // fetch("http://localhost:8000/api/blogs/blog", requestOptions)
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log(result)
+    //     alert(result.message)
+    //     setTitle("")
+    //     setDescription("")
+    //     setImg("")
+    //     props.setDisplay(false)
+    //   })
+    //   .catch((error) => console.error(error))
+    //   .finally(() => {
+    //   })
   }
 
   console.log(blog.blog, 'fef')
@@ -167,7 +171,7 @@ const Blog = (props) => {
           <input id='103' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='enter a description' required /><br />
           <label htmlFor='104' className='font-semibold ps-2 text-xl'>images</label><br />
           <input id='104' className="border-2 border-blue-500 h-10 w-full sm:w-full p-1 rounded-3xl" type="file" onChange={(e) => setImg(e.target.files[0])} required /><br />
-          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>{!loading ? "Submit" : <ClipLoader color='white' size={20} />}</button>
+          <button type='submit' className='border rounded-3xl bg-blue-500 text-white w-full mt-4 p-2 font-semibold text-xl cursor-pointer' onClick={handleAddData}>{!isloading ? "Submit" : <ClipLoader color='white' size={20} />}</button>
         </form>
       </div>
         : ""
@@ -190,7 +194,7 @@ const Blog = (props) => {
               </div>
               <p className='font-medium pt-2'>Title:- {item.title}</p>
               <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-300'} font-medium`}>Description:- {item.description}</p>
-              <p className='font-medium'>Date:- {item.date}</p>
+              <p className='font-medium'>Date:- {new Date(item.createdAt).toLocaleDateString()}</p>
               <div className='flex gap-5 mt-2 flex-wrap'>
                 <button onClick={() => handleEdit(item)} className='bg-amber-500 p-1 font-medium mt-2 ps-4 pe-4 rounded text-white cursor-pointer'>Edit</button>
                 <button onClick={() => {
