@@ -3,10 +3,10 @@ import axios from "axios";
 
 
 
-export const addBlog = createAsyncThunk('addblog', async (data, { rejectWithValue, getState }) => {
+export const updateBlog = createAsyncThunk('addblog', async (id,data, { rejectWithValue, getState }) => {
     try {
         const token = getState().auth.token;
-        const response = await axios.post(`http://localhost:8000/api/blogs/blog`, data, {
+        const response = await axios.post(`http://localhost:8000/api/blogs/blog${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -19,8 +19,8 @@ export const addBlog = createAsyncThunk('addblog', async (data, { rejectWithValu
 
 })
 
-const addBlogSlice = createSlice({
-    name: "addblog",
+const updateBlogSlice = createSlice({
+    name: "updateblog",
     initialState: {
         blog: [],
         isloading: false,
@@ -28,16 +28,16 @@ const addBlogSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(addBlog.fulfilled, (state, action) => {
+            .addCase(updateBlog.fulfilled, (state, action) => {
                 state.blog = action.payload;
                 state.iserror = null;
                 state.isloading = false;
             })
-            .addCase(addBlog.pending, (state) => {
+            .addCase(updateBlog.pending, (state) => {
                 state.iserror = null;
                 state.isloading = true;
             })
-            .addCase(addBlog.rejected, (state, action) => {
+            .addCase(updateBlog.rejected, (state, action) => {
                 state.iserror = action.payload;
                 state.isloading = false;
             })
@@ -45,4 +45,4 @@ const addBlogSlice = createSlice({
     }
 })
 
-export default addBlogSlice.reducer
+export default updateBlogSlice.reducer
