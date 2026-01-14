@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
 import { addBlog } from '../redux/userSlice/addBlog';
+import { addBlog } from '../redux/userSlice/updateBlog';
 
 
 const Blog = (props) => {
@@ -25,6 +26,7 @@ const Blog = (props) => {
   const { user, token, } = useSelector(state => state.auth)
   const { blog, loading, error } = useSelector(state => state.allBlogs)
   const { blogs, isloading, iserror } = useSelector(state => state.addBlogs)
+  const {  isloadings, iserrors } = useSelector(state => state.updateBlog)
 
   console.log(blog,'dd')
 
