@@ -151,7 +151,7 @@ const Blog = (props) => {
           <form action="" className='p-3 shadow-2xl rounded'>
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e) => setTitle(e.target.value)} type="text" required placeholder='Title' /><br />
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e) => setDescription(e.target.value)} type="text" required placeholder='Description' /><br />
-            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >Update</button>
+            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >{isloadings ?<ClipLoader/>: "Update"}</button>
           </form>
         </div>}
 
