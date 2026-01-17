@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
 import { addBlog } from '../redux/userSlice/addBlog';
+import { addBlog } from '../redux/userSlice/updateBlog';
 
 
 const Blog = (props) => {
@@ -25,6 +26,7 @@ const Blog = (props) => {
   const { user, token, } = useSelector(state => state.auth)
   const { blog, loading, error } = useSelector(state => state.allBlogs)
   const { blogs, isloading, iserror } = useSelector(state => state.addBlogs)
+  const {  isloadings, iserrors } = useSelector(state => state.updateBlog)
 
   console.log(blog,'dd')
 
@@ -127,7 +129,7 @@ const Blog = (props) => {
           <form action="" className='p-3 shadow-2xl rounded'>
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e) => setTitle(e.target.value)} type="text" required placeholder='Title' /><br />
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e) => setDescription(e.target.value)} type="text" required placeholder='Description' /><br />
-            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >Update</button>
+            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >{isloadings ?<ClipLoader/>: "Update"}</button>
           </form>
         </div>}
 
