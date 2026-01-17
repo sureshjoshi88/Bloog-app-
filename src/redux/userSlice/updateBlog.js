@@ -23,8 +23,8 @@ const updateBlogSlice = createSlice({
     name: "updateblog",
     initialState: {
         blog: [],
-        isloading: false,
-        iserror: null
+        isloadings: false,
+        iserrors: null
     },
     extraReducers: (builder) => {
         builder

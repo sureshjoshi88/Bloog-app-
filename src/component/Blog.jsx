@@ -5,7 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
 import { addBlog } from '../redux/userSlice/addBlog';
-import { addBlog } from '../redux/userSlice/updateBlog';
+// import { updateBlog } from '../redux/userSlice/updateBlog';
 
 
 const Blog = (props) => {
