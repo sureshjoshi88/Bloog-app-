@@ -110,29 +110,7 @@ const Blog = (props) => {
     formdata.append("image", img);
     console.log(formdata)
     dispatch(addBlog(formdata))
-    // const myHeaders = new Headers();
-    // myHeaders.append("Authorization", `Bearer ${token}`);
-
-    // const requestOptions = {
-    //   method: "POST",
-    //   body: formdata,
-    //   headers: myHeaders,
-    //   redirect: "follow"
-    // };
-
-    // fetch("http://localhost:8000/api/blogs/blog", requestOptions)
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     console.log(result)
-    //     alert(result.message)
-    //     setTitle("")
-    //     setDescription("")
-    //     setImg("")
-    //     props.setDisplay(false)
-    //   })
-    //   .catch((error) => console.error(error))
-    //   .finally(() => {
-    //   })
+  
   }
 
   console.log(blog.blog, 'fef')
