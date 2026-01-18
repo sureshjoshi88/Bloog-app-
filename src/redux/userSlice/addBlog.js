@@ -22,14 +22,14 @@ export const addBlog = createAsyncThunk('addblog', async (data, { rejectWithValu
 const addBlogSlice = createSlice({
     name: "addblog",
     initialState: {
-        blog: [],
+        isSuccess: false,
         isloading: false,
         iserror: null
     },
     extraReducers: (builder) => {
         builder
             .addCase(addBlog.fulfilled, (state, action) => {
-                state.blog = action.payload;
+                state.isSuccess = true;
                 state.iserror = null;
                 state.isloading = false;
             })

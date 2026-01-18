@@ -3,10 +3,10 @@ import axios from "axios";
 
 
 
-export const updateBlog = createAsyncThunk('addblog', async (id,data, { rejectWithValue, getState }) => {
+export const updateBlog = createAsyncThunk('addblog', async ({id,data}, { rejectWithValue, getState }) => {
     try {
         const token = getState().auth.token;
-        const response = await axios.post(`http://localhost:8000/api/blogs/blog${id}`, data, {
+        const response = await axios.put(`http://localhost:8000/api/blogs/blog${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -30,16 +30,16 @@ const updateBlogSlice = createSlice({
         builder
             .addCase(updateBlog.fulfilled, (state, action) => {
                 state.blog = action.payload;
-                state.iserror = null;
-                state.isloading = false;
+                state.iserrors = null;
+                state.isloadings = false;
             })
             .addCase(updateBlog.pending, (state) => {
-                state.iserror = null;
-                state.isloading = true;
+                state.iserrors = null;
+                state.isloadings = true;
             })
             .addCase(updateBlog.rejected, (state, action) => {
-                state.iserror = action.payload;
-                state.isloading = false;
+                state.iserrors = action.payload;
+                state.isloadings = false;
             })
 
     }

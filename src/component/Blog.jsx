@@ -18,7 +18,7 @@ const Blog = (props) => {
   const [open, setOpen] = useState(false);
   const [updateId, setUpdateId] = useState("");
 
-      const notify = (value) => toast(value);
+  const notify = (value) => toast(value);
 
 
   const dispatch = useDispatch()
@@ -29,10 +29,10 @@ const Blog = (props) => {
 
   const { user, token, } = useSelector(state => state.auth)
   const { blog, loading, error } = useSelector(state => state.allBlogs)
-  const { blogs, isloading, iserror } = useSelector(state => state.addBlogs)
-  const {  isloadings, iserrors } = useSelector(state => state.updateBlog)
+  const { isSuccess, isloading, iserror } = useSelector(state => state.addBlogs)
+  const { isloadings, iserrors } = useSelector(state => state.updateBlog)
 
-  console.log(blog,'dd')
+  console.log(blog, 'dd')
 
 
   useEffect(() => {
@@ -116,37 +116,26 @@ const Blog = (props) => {
     formdata.append("image", img);
     console.log(formdata)
     dispatch(addBlog(formdata))
-    // if(iserror){
-    //   alert(iserror);
-    //   notify(iserror.message || "Something went wrong");
-    //   setTitle("")
-    //   setDescription("");
-    //   setImg(null)
-    //   props.setDisplay(false)
-    // }
-    
-    // if(!iserror || !isloading){
-    //   notify("Blog added successfully");
-    //   setTitle("")
-    //   setDescription("");
-    //   setImg(null)
-    //   props.setDisplay(false)
-    // }
-  }
   
-  useEffect(() => {
-  if (iserror) {
-    notify(iserror || "Something went wrong");
   }
 
-  if (!isloading && !iserror) {
-    notify("Blog added successfully");
-    setTitle("");
-    setDescription("");
-    setImg(null);
-    props.setDisplay(false);
-  }
-}, [iserror, isloading]);
+  useEffect(() => {
+    if (iserror) {
+      notify(iserror || "Something went wrong");
+      setTitle("")
+      setDescription("");
+      setImg(null)
+      props.setDisplay(false)
+    }
+
+    if (blogs || !isloading) {
+      notify("Blog added successfully");
+      setTitle("");
+      setDescription("");
+      setImg(null);
+      props.setDisplay(false);
+    }
+  }, [iserror, isloading]);
   console.log(iserror)
 
   return (
@@ -154,7 +143,7 @@ const Blog = (props) => {
 
 
     <div className='relative'>
-      <ToastContainer/>
+      <ToastContainer />
 
 
       {
@@ -162,7 +151,7 @@ const Blog = (props) => {
           <form action="" className='p-3 shadow-2xl rounded'>
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={title} onChange={(e) => setTitle(e.target.value)} type="text" required placeholder='Title' /><br />
             <input className='border rounded-full p-1 border-blue-500 mt-3 w-80' value={description} onChange={(e) => setDescription(e.target.value)} type="text" required placeholder='Description' /><br />
-            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >{isloadings ?<ClipLoader/>: "Update"}</button>
+            <button className='w-full bg-blue-500 rounded-full p-1.5 cursor-pointer mt-3 text-white font-semibold' onClick={handleUpdate} >{isloadings ? <ClipLoader /> : "Update"}</button>
           </form>
         </div>}
 
