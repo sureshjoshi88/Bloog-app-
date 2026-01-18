@@ -35,10 +35,7 @@ const Blog = (props) => {
   console.log(blog, 'dd')
 
 
-  useEffect(() => {
-    dispatch(getBlog(search))
-
-  }, [search]);
+  
 
   const handleEdit = (item) => {
     setOpen(true)
@@ -128,16 +125,19 @@ const Blog = (props) => {
       props.setDisplay(false)
     }
 
-    if (blogs || !isloading) {
+    if (isSuccess) {
       notify("Blog added successfully");
       setTitle("");
       setDescription("");
       setImg(null);
       props.setDisplay(false);
     }
-  }, [iserror, isloading]);
-  console.log(iserror)
+  }, [iserror, isSuccess]);
 
+  useEffect(() => {
+    dispatch(getBlog(search))
+
+  }, [search,dispatch]);
   return (
 
 
