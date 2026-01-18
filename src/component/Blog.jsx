@@ -136,7 +136,7 @@ const Blog = (props) => {
   
   useEffect(() => {
   if (iserror) {
-    notify(iserror.message || "Something went wrong");
+    notify(iserror || "Something went wrong");
   }
 
   if (!isloading && !iserror) {
