@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
 import { addBlog } from '../redux/userSlice/addBlog';
+import { toast, ToastContainer } from 'react-toastify';
 // import { updateBlog } from '../redux/userSlice/updateBlog';
 
 
@@ -16,6 +17,9 @@ const Blog = (props) => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [updateId, setUpdateId] = useState("");
+
+      const notify = (value) => toast(value);
+
 
   const dispatch = useDispatch()
 
@@ -112,22 +116,45 @@ const Blog = (props) => {
     formdata.append("image", img);
     console.log(formdata)
     dispatch(addBlog(formdata))
-    if(iserror){
-      alert(iserror);
-      setTitle("")
-      setDescription("");
-      setImg(null)
-      props.setDisplay(false)
-      
-    }
+    // if(iserror){
+    //   alert(iserror);
+    //   notify(iserror.message || "Something went wrong");
+    //   setTitle("")
+    //   setDescription("");
+    //   setImg(null)
+    //   props.setDisplay(false)
+    // }
+    
+    // if(!iserror || !isloading){
+    //   notify("Blog added successfully");
+    //   setTitle("")
+    //   setDescription("");
+    //   setImg(null)
+    //   props.setDisplay(false)
+    // }
+  }
+  
+  useEffect(() => {
+  if (iserror) {
+    notify(iserror.message || "Something went wrong");
   }
 
+  if (!isloading && !iserror) {
+    notify("Blog added successfully");
+    setTitle("");
+    setDescription("");
+    setImg(null);
+    props.setDisplay(false);
+  }
+}, [iserror, isloading]);
+  console.log(iserror)
 
   return (
 
 
 
     <div className='relative'>
+      <ToastContainer/>
 
 
       {

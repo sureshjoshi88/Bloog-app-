@@ -6,7 +6,6 @@ import Blog from './component/Blog';
 import Form from './component/Form';
 import { Route, Routes } from 'react-router-dom';
 import Login from './component/Login';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Default from './component/Default';
 
@@ -21,7 +20,6 @@ function App() {
   return (
     <>
    <Navbar  setDisplay={setDisplay} />
-         <ToastContainer position="top-right" autoClose={3000} />
    <Routes>
     <Route path='*' element={<Default />} />
     <Route path='/' element={<Blog  display={display} setDisplay={setDisplay} />}/>
