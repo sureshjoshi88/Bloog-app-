@@ -112,10 +112,16 @@ const Blog = (props) => {
     formdata.append("image", img);
     console.log(formdata)
     dispatch(addBlog(formdata))
-  
+    if(iserror){
+      alert(iserror);
+      setTitle("")
+      setDescription("");
+      setImg(null)
+      props.setDisplay(false)
+      
+    }
   }
 
-  console.log(blog.blog, 'fef')
 
   return (
 
