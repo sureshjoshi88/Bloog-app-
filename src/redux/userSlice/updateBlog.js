@@ -29,7 +29,7 @@ const updateBlogSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(updateBlog.fulfilled, (state, action) => {
-                state.blog = action.payload;
+                state.success = true;
                 state.iserrors = null;
                 state.isloadings = false;
             })
