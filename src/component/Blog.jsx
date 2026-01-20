@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../redux/userSlice/getBlog';
 import { addBlog } from '../redux/userSlice/addBlog';
 import { toast, ToastContainer } from 'react-toastify';
-// import { updateBlog } from '../redux/userSlice/updateBlog';
+import updateBlog from '../redux/userSlice/updateBlog';
 
 
 const Blog = (props) => {
@@ -27,7 +27,7 @@ const Blog = (props) => {
     e.preventDefault();
   }
 
-  const { user, token, } = useSelector(state => state.auth)
+  const { token, } = useSelector(state => state.auth)
   const { blog, loading, error } = useSelector(state => state.allBlogs)
   const { isSuccess, isloading, iserror } = useSelector(state => state.addBlogs)
   const { isloadings, iserrors } = useSelector(state => state.updateBlog)
@@ -50,26 +50,28 @@ const Blog = (props) => {
       return
     }
     try {
-      const raw = JSON.stringify({ title, description });
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${token}`);
-      myHeaders.append("Content-Type", "application/json");
-      const requestOptions = {
-        method: "PUT",
-        body: raw,
-        headers: myHeaders,
-        redirect: "follow"
-      };
+      dispatch(updateBlog(updateId,{title,description}))
+      // const raw = JSON.stringify({ title, description });
+      // const myHeaders = new Headers();
+      // myHeaders.append("Authorization", `Bearer ${token}`);
+      // myHeaders.append("Content-Type", "application/json");
+      // const requestOptions = {
+      //   method: "PUT",
+      //   body: raw,
+      //   headers: myHeaders,
+      //   redirect: "follow"
+      // };
 
-      const data = await fetch(`http://localhost:8000/api/blogs/blog/${updateId}`, requestOptions)
-      const response = await data.json();
-      console.log(response)
-      alert(response.message)
-      setTitle("")
-      setDescription("")
-      setOpen(false)
+      // const data = await fetch(`http://localhost:8000/api/blogs/blog/${updateId}`, requestOptions)
+      // const response = await data.json();
+      // console.log(response)
+      // alert(response.message)
+      // setTitle("")
+      // setDescription("")
+      // setOpen(false)
     } catch (error) {
       alert(error.message)
+      notify(error.message)
       console.log(error);
 
     }
