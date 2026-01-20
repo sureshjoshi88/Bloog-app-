@@ -12,26 +12,6 @@ const Form = (props) => {
 
   const [errors, setErrors] = useState({});
 
-  // const validate = () => {
-  //   const newErrors = {};
-
-  //   if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-  //     newErrors.name = 'Name must contain only letters';
-  //   }
-
-  //   if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,6}$/.test(formData.email)) {
-  //     newErrors.email = 'Invalid email format';
-  //   }
-
-  //   if (!/^[A-Za-z\d@$!%*#?&]{6,}$/.test(formData.password)) {
-  //     newErrors.password = 'Password must be at least 6 characters';
-  //   }
-
-
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
