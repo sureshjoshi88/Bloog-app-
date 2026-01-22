@@ -10,7 +10,6 @@ const Form = (props) => {
     password: ''
   });
 
-  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,7 +72,6 @@ const Form = (props) => {
             type="text"
             placeholder="Enter your name"
           />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
 
         {/* Email */}
@@ -87,7 +85,6 @@ const Form = (props) => {
             type="email"
             placeholder="Enter your email"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
 
         {/* Password */}
@@ -101,7 +98,6 @@ const Form = (props) => {
             type="password"
             placeholder="Enter password"
           />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
 
         <button
