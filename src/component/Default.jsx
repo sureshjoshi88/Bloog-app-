@@ -3,7 +3,7 @@ import React from 'react'
 const Default = () => {
   return (
     <div className='h-100 flex justify-center items-center'>
-      <p className=' text-2xl font-medium'>No Page found</p>
+      <p className=' text-2xl font-medium'> Page not  found</p>
     </div>
   )
 }
