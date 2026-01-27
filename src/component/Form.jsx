@@ -42,7 +42,8 @@ const Form = (props) => {
             setFormData({name:"",email:"",password:""})
           }
           console.log("signup succesfull", result.token);
-          localStorage.setItem("token", JSON.stringify(result.token))
+          // localStorage.setItem("token", JSON.stringify(result.token))
+          console.log(result.token)
           setFormData({ name: '', email: '', password: '' });
           props.setDisplay(false)
         })
