@@ -42,14 +42,12 @@ const Form = (props) => {
             setFormData({name:"",email:"",password:""})
           }
           console.log("signup succesfull", result.token);
-          // localStorage.setItem("token", JSON.stringify(result.token))
           console.log(result.token)
           setFormData({ name: '', email: '', password: '' });
           props.setDisplay(false)
         })
     } catch (error) {
       console.log(error);
-      // alert("problem signup falied")
       toast.error(error.message)
       setFormData({name:"",email:"",password:""})
 
