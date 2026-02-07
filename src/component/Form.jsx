@@ -18,7 +18,7 @@ const Form = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!formData.name||!formData.email||!formData.password){
-      toast.warning("please all are filed is required")
+      toast.warning("all are filed is required")
       return 
     }
     try {
