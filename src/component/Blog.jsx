@@ -32,11 +32,6 @@ const Blog = (props) => {
   const { isSuccess, isloading, iserror } = useSelector(state => state.addBlogs)
   const { isloadings, iserrors } = useSelector(state => state.updateBlog)
 
-  console.log(blog, 'dd')
-
-
-  
-
   const handleEdit = (item) => {
     setOpen(true)
     setTitle(item.title)
