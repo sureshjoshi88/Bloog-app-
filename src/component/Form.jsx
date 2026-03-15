@@ -10,27 +10,6 @@ const Form = (props) => {
     password: ''
   });
 
-  const [errors, setErrors] = useState({});
-
-  // const validate = () => {
-  //   const newErrors = {};
-
-  //   if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-  //     newErrors.name = 'Name must contain only letters';
-  //   }
-
-  //   if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,6}$/.test(formData.email)) {
-  //     newErrors.email = 'Invalid email format';
-  //   }
-
-  //   if (!/^[A-Za-z\d@$!%*#?&]{6,}$/.test(formData.password)) {
-  //     newErrors.password = 'Password must be at least 6 characters';
-  //   }
-
-
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,7 +18,7 @@ const Form = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!formData.name||!formData.email||!formData.password){
-      toast.warning("please all are filed is required")
+      toast.warning("all are filed is required")
       return 
     }
     try {
@@ -63,13 +42,12 @@ const Form = (props) => {
             setFormData({name:"",email:"",password:""})
           }
           console.log("signup succesfull", result.token);
-          localStorage.setItem("token", JSON.stringify(result.token))
+          console.log(result.token)
           setFormData({ name: '', email: '', password: '' });
           props.setDisplay(false)
         })
     } catch (error) {
       console.log(error);
-      // alert("problem signup falied")
       toast.error(error.message)
       setFormData({name:"",email:"",password:""})
 
@@ -93,7 +71,6 @@ const Form = (props) => {
             type="text"
             placeholder="Enter your name"
           />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
 
         {/* Email */}
@@ -107,7 +84,6 @@ const Form = (props) => {
             type="email"
             placeholder="Enter your email"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
 
         {/* Password */}
@@ -121,7 +97,6 @@ const Form = (props) => {
             type="password"
             placeholder="Enter password"
           />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
 
         <button
