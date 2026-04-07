@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useTheme } from '../context/themeReducer';
 import { toast } from 'react-toastify';
 
@@ -17,9 +17,9 @@ const Form = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!formData.name||!formData.email||!formData.password){
+    if (!formData.name || !formData.email || !formData.password) {
       toast.warning("all are filed is required")
-      return 
+      return
     }
     try {
       const myHeaders = new Headers();
@@ -39,9 +39,8 @@ const Form = (props) => {
         .then((result) => {
           if (!result.status) {
             toast.error(result.message)
-            setFormData({name:"",email:"",password:""})
+            setFormData({ name: "", email: "", password: "" })
           }
-          console.log("signup succesfull", result.token);
           console.log(result.token)
           setFormData({ name: '', email: '', password: '' });
           props.setDisplay(false)
@@ -49,7 +48,7 @@ const Form = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message)
-      setFormData({name:"",email:"",password:""})
+      setFormData({ name: "", email: "", password: "" })
 
     }
 
